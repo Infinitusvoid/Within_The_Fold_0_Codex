@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\glad">
+      <UniqueIdentifier>{bf897410-1225-4be1-85cc-638ed85aa625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{68da8e4d-a2fe-4965-add5-ec1c0777d351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\ImageUtils">
+      <UniqueIdentifier>{541ebd70-0de7-49f7-9573-10b813e2a477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppCommponents">
+      <UniqueIdentifier>{9b878210-bd9d-4327-9cb1-7eb9a7dd02de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{a1889499-df4a-4fd5-b03a-ccdf11b142b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{56e0e788-6973-470d-acaa-c0244ea497d9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Header Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageUtils.cpp">
+      <Filter>Header Files\Engine\ImageUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\File.cpp">
+      <Filter>CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\Folder.cpp">
+      <Filter>CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\ImageRGBA.cpp">
+      <Filter>CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\NameGenerators.cpp">
+      <Filter>CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\Rectangle2d.cpp">
+      <Filter>CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CppCommponents\Search_BreadthFirst_2d.cpp">
+      <Filter>CppCommponents</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderHot.cpp">
+      <Filter>Header Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Maze.cpp">
+      <Filter>Header Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Header Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenerateShaders.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="f_embeded_GLSL_source_fragment_shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="f_embeded_GLSL_source_base_glsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MazeGenerate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="f_embeded_GLSL_source_vertex_shader_exploring_0000.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundMusicExample.cpp">
+      <Filter>Source Files\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderRuntime.cpp">
+      <Filter>Header Files\Engine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fragment_shader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="vertex_shader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="fragment_shader_exploring_0000.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="vertex_shader_exploring_0000.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\README.md">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="fragment_shader_exploring_0001.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="fragment_shader_exploring_0002.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="fragment_shader_exploring_0003.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ImageUtils.h">
+      <Filter>Header Files\Engine\ImageUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\File.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\Folder.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\ImageRGBA.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\json.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\NameGenerators.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\Random.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\Rectangle2d.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\Search_BreadthFirst_2d.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CppCommponents\TempleteUtils.h">
+      <Filter>CppCommponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeGeometryBuilder.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderHot.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MazeCamera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraControl.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enviroment.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawCommandsSingleMaterial.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Maze.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Materials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GenerateShaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MazeGenerate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_0.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_1.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_2.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_3.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_4.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_5.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_6.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_7.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_8.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_9.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_10.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_11.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_12.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_13.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_14.h">
+      <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_15.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_17.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_18.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_19.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_20.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_W_04_06_2025_20_43.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music_W_04_06_2025_21_55.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderRuntime.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Global_constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TheExploration_0000.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="W_05_06_2025_17_00.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

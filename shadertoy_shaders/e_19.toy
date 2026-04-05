@@ -1,0 +1,18 @@
+float smin(float a,float b,float k){ float h=clamp(0.5+0.5*(b-a)/k,0.0,1.0); return mix(b,a,h)-k*h*(1.0-h); }
+vec3 pal(float t){ return 0.55 + 0.45*cos(6.28318*(vec3(0.02,0.38,0.68)+t)); }
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = (fragCoord - 0.5*iResolution.xy) / iResolution.y;
+    float d = 10.0;
+    for(int i=0;i<3;i++){
+        float f=float(i), t=iTime+f*2.1;
+        vec2 c = 0.35*vec2(cos(1.2*t+f), sin(1.7*t-f));
+        float di = length(uv-c)-0.22;
+        d = (i==0) ? di : smin(d,di,0.22);
+    }
+    float fill = smoothstep(0.03,0.0,d);
+    float glow = 0.03/(abs(d)+0.03);
+    vec3 col = pal(0.12*iTime - 1.4*d) * (0.2 + fill + 0.6*glow);
+    fragColor = vec4(col,1.0);
+}

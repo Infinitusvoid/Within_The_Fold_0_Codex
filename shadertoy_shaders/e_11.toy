@@ -1,0 +1,16 @@
+mat2 rot(float a){ float c=cos(a), s=sin(a); return mat2(c,-s,s,c); }
+vec3 pal(float t){ return 0.55 + 0.45*cos(6.28318*(vec3(0.0,0.33,0.67)+t)); }
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 p = (fragCoord - 0.5*iResolution.xy) / iResolution.y;
+    p *= rot(0.2*iTime);
+    float a = atan(p.y,p.x), r = length(p);
+    float seg = 6.28318/7.0;
+    a = abs(mod(a,seg)-0.5*seg);
+    p = vec2(cos(a),sin(a))*r;
+    float f = sin(18.0*p.x + 6.0*p.y - 2.0*iTime);
+    float m = smoothstep(0.3,0.0,abs(f)) * exp(-1.5*r);
+    vec3 col = pal(0.1*iTime + r + 0.1*f) * (0.2 + 1.7*m);
+    fragColor = vec4(col,1.0);
+}

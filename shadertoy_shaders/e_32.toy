@@ -1,0 +1,23 @@
+vec3 pal(float t)
+{
+    return 0.55 + 0.45*cos(6.28318*(vec3(0.08,0.35,0.67)+t));
+}
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = (fragCoord - 0.5*iResolution.xy)/iResolution.y;
+    float r = length(uv);
+    float a = atan(uv.y,uv.x);
+
+    float z = 1.0/(r+0.18);
+    float f1 = sin(10.0*a + 3.0*z - 2.0*iTime);
+    float f2 = sin(16.0*a - 4.0*z + 1.7*iTime);
+    float bands = smoothstep(0.25,0.0,abs(f1*f2));
+    float ring = smoothstep(0.2,0.0,abs(sin(10.0*r - 3.0*iTime)));
+
+    vec3 col = pal(0.08*iTime + 0.08*z + 0.15*f1);
+    col *= 0.2 + 1.6*bands + 0.6*ring;
+    col *= exp(-0.9*r);
+
+    fragColor = vec4(col,1.0);
+}

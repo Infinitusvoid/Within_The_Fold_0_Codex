@@ -1,0 +1,240 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <memory>
+
+#include "CppCommponents/Random.h"
+#include "CppCommponents/Folder.h"
+
+#include "CppCommponents/File.h"
+
+#include "CubeGeometryBuilder.h"
+#include "Time.h"
+#include "ImageUtils.h"
+
+#include "GL.h"
+
+
+
+#include "Materials.h"
+
+#include "Maze.h"
+#include "MazeCamera.h"
+
+#include "GenerateShaders.h"
+
+
+struct MazeGlobal
+{
+    // Settings
+    int SCR_WIDTH = 1920;
+    int SCR_HEIGHT = 1080;
+
+    // We will capture mouse movement to rotate the camera view
+    // MazeCamera* cameraPtr = nullptr;
+
+    bool firstMouse = true;
+    float lastX = SCR_WIDTH / 2.0f;
+    float lastY = SCR_HEIGHT / 2.0f;
+};
+
+MazeGlobal global;
+
+void framebuffer_size_callback_maze(GLFWwindow* window, int width, int height);
+void mouse_callback_maze(GLFWwindow* window, double xpos, double ypos);
+
+#include "DrawCommandsSingleMaterial.h"
+#include "Enviroment.h"
+#include "CameraControl.h"
+
+std::string f_embeded_GLSL_source_base_glsl();
+std::string f_embeded_GLSL_source_vertex_shader_exploring_0000();
+std::string f_embeded_GLSL_source_fragment_shader();
+
+void f_audio_off();
+void f_audio_on();
+bool f_audio_init();
+void f_audio_main_loop(float played_x, float player_y, float player_z);
+void f_audio_clean_up();
+
+struct Engine
+{
+    GLFWwindow* window;
+
+    Maze_::Maze maze;
+
+    Time time;
+    CameraControl camera_control;
+    
+    MazeCamera* camera;
+};
+
+namespace Engine_
+{
+    void init(Engine& engine)
+    {
+        Maze_::init(engine.maze);
+
+        engine.window = GL_::init_window(global.SCR_WIDTH, global.SCR_HEIGHT, framebuffer_size_callback_maze, mouse_callback_maze);
+        
+        
+
+        engine.camera = new MazeCamera(glm::vec3(1.5f, 0.5f, 1.5f), 0.0f, 0.0f);
+        engine.camera->Position = Maze_::generate_start_camera_position(engine.maze);
+    }
+
+    void run(Engine& engine)
+    {
+        Enviroment_::Enviroment enviroment = Enviroment_::Enviroment_::generate_enviroment(engine.maze);
+        std::vector<DrawCommandsSingleMaterial_::DrawCommandsSingleMaterial> drawcommands_enviroment = Enviroment_::Enviroment_::generate_draw_commands(enviroment);
+
+        
+
+        std::chrono::steady_clock::time_point lastHotCheck = std::chrono::steady_clock::now();
+
+        
+
+        f_audio_init();
+        
+        bool first_loop = true;
+
+        while (!glfwWindowShouldClose(engine.window))
+        {
+            engine.time.update();
+            engine.camera_control.update(engine.window, *engine.camera, engine.time, engine.maze);
+
+            
+
+            // Set up the projection matrix (field of view, aspect ratio, near and far planes)
+            glm::mat4 projection = glm::perspective(glm::radians(45.0f),
+                (float)global.SCR_WIDTH / (float)global.SCR_HEIGHT,
+                0.01f, 100.0f);
+
+
+            GL_::clear_screen(0.1f, 0.6f, 0.9f);
+
+            
+
+            f_audio_main_loop(engine.camera->Position.x, engine.camera->Position.y, engine.camera->Position.z);
+
+            // Compute view matrix from the camera
+            glm::mat4 view = engine.camera->GetViewMatrix();
+
+            // Draw the floor
+            glm::mat4 model = glm::mat4(1.0f);
+
+            {
+                for (DrawCommandsSingleMaterial_::DrawCommandsSingleMaterial& draw_commands_single_material : drawcommands_enviroment)
+                {
+
+                    DrawCommandsSingleMaterial_::draw(draw_commands_single_material, model, view, projection, glfwGetTime(), engine.camera->Position);
+                }
+            }
+
+
+            // The hot reloading of shaders
+            {
+                auto now = std::chrono::steady_clock::now();
+                if (now - lastHotCheck > std::chrono::milliseconds(1000))
+                {
+                    lastHotCheck = now;
+                    // check all shaders in one go
+                    for (auto& material : drawcommands_enviroment)
+                    {
+                        if (material.material.shader != nullptr)
+                        {
+                            ShaderHot_::checkForChanges(*material.material.shader);
+                        }
+                    }
+                }
+            }
+
+
+            // print fps
+            {
+                if (Global_constants_::print_out_fps)
+                {
+                    std::cout << "fps : " << engine.time.get_fps() << "\n";
+                }
+            }
+
+            GL_::swap_buffers_pull_events(engine.window);
+
+
+            if (first_loop)
+            {
+                first_loop = false;
+                engine.camera_control.toggleFullscreen(engine.window);
+            }
+        }
+
+        f_audio_clean_up();
+    }
+}
+
+
+Engine engine;
+
+int main()
+{
+    if (Global_constants_::use_runtime_generated_shaders_without_writing_files)
+    {
+        
+    }
+    else
+    {
+        Folder::create_folder_if_does_not_exist_already("generated_shaders");
+        File::writeFileIfNotExists("generated_shaders/base.glsl", f_embeded_GLSL_source_base_glsl());
+        File::writeFileIfNotExists("generated_shaders/vertex_shader_exploring_0000.glsl", f_embeded_GLSL_source_vertex_shader_exploring_0000());
+        File::writeFileIfNotExists("generated_shaders/fragment_shader.glsl", f_embeded_GLSL_source_fragment_shader());
+        GenerateShaders_::run_write_to_file_shaders();
+    }
+
+    // start up message
+    {
+        std::cout << "Starting the game...\n";
+        std::cout << "Compiling shaders - this may take a minute or two.\n\n";
+
+        std::cout << "=== Controls ===\n";
+        std::cout << "W, A, S, D : Move\n";
+        std::cout << "F          : Toggle Fullscreen\n";
+        std::cout << "2          : Toggle Fly Mode / Walk Mode\n";
+        std::cout << "M          : Toggle Sound On/Off\n";
+        std::cout << "\n";
+    }
+    
+
+
+
+    Engine_::init(engine);
+
+    GenerateShaders_::generate_shader();
+
+    Engine_::run(engine);
+    return 0;
+}
+
+void framebuffer_size_callback_maze(GLFWwindow* window, int width, int height)
+{
+    GL_::update_viewport(window, width, height);
+}
+
+void mouse_callback_maze(GLFWwindow* window, double xpos, double ypos)
+{
+    if (global.firstMouse) {
+        global.lastX = xpos;
+        global.lastY = ypos;
+        global.firstMouse = false;
+    }
+    float xoffset = xpos - global.lastX;
+    float yoffset = global.lastY - ypos;  // Reversed: y coordinate goes from bottom to top
+    global.lastX = xpos;
+    global.lastY = ypos;
+    if (engine.camera) {
+        engine.camera->ProcessMouseMovement(xoffset, yoffset);
+    }
+}

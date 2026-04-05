@@ -1,0 +1,22 @@
+vec3 pal(float t)
+{
+    return 0.55 + 0.45*cos(6.28318*(vec3(0.04,0.32,0.62)+t));
+}
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = (fragCoord - 0.5*iResolution.xy)/iResolution.y;
+
+    float d = 1.0/(uv.y + 1.25);
+    vec2 p = vec2(uv.x*d*3.5, d + iTime*2.2);
+
+    float a = smoothstep(0.08,0.0,abs(fract(p.x)-0.5));
+    float b = smoothstep(0.08,0.0,abs(fract(p.y)-0.5));
+    float c = smoothstep(0.12,0.0,abs(fract(p.x+p.y)-0.5));
+
+    float m = a + b + 0.7*c;
+    vec3 col = pal(0.05*iTime + 0.08*p.y + 0.05*p.x)*m;
+    col *= 1.0/(1.0+0.12*d*d);
+
+    fragColor = vec4(col,1.0);
+}

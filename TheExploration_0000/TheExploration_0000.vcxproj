@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2175de19-24aa-4214-ab4c-73fee85cd672}</ProjectGuid>
+    <RootNamespace>TheExploration0000</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Within_The_Fold_1_Codex</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)External_libs\GLEW\glew-2.1.0\include;$(SolutionDir)External_libs\GLFW\glfw-3.3.8.bin.WIN64\include;$(SolutionDir)External_libs\glm_0_9_9_7\glm\;$(SolutionDir)External_libs\ASSIMP\include;$(SolutionDir)External_libs\glad\include;$(SolutionDir)External_libs\stb;$(SolutionDir)External_libs\miniaudio;$(SolutionDir)External_libs\tinyply-master\tinyply-master\source;$(SolutionDir)External_libs\plog\include;$(SolutionDir)External_libs\imgui-docking;$(SolutionDir)External_libs\FastNoiseLite</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)External_libs\GLEW\glew-2.1.0\lib\Release\x64;$(SolutionDir)External_libs\GLFW\glfw-3.3.8.bin.WIN64\lib-vc2022;$(SolutionDir)External_libs\ASSIMP\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)External_libs\GLEW\glew-2.1.0\include;$(SolutionDir)External_libs\GLFW\glfw-3.3.8.bin.WIN64\include;$(SolutionDir)External_libs\glm_0_9_9_7\glm\;$(SolutionDir)External_libs\ASSIMP\include;$(SolutionDir)External_libs\glad\include;$(SolutionDir)External_libs\stb;$(SolutionDir)External_libs\miniaudio;$(SolutionDir)External_libs\tinyply-master\tinyply-master\source;$(SolutionDir)External_libs\plog\include;$(SolutionDir)External_libs\imgui-docking;$(SolutionDir)External_libs\FastNoiseLite</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)External_libs\GLEW\glew-2.1.0\lib\Release\x64;$(SolutionDir)External_libs\GLFW\glfw-3.3.8.bin.WIN64\lib-vc2022;$(SolutionDir)External_libs\ASSIMP\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)External_libs\GLEW\glew-2.1.0\include;$(SolutionDir)External_libs\GLFW\glfw-3.3.8.bin.WIN64\include;$(SolutionDir)External_libs\glm_0_9_9_7\glm\;$(SolutionDir)External_libs\ASSIMP\include;$(SolutionDir)External_libs\glad\include;$(SolutionDir)External_libs\stb;$(SolutionDir)External_libs\miniaudio;$(SolutionDir)External_libs\tinyply-master\tinyply-master\source;$(SolutionDir)External_libs\plog\include;$(SolutionDir)External_libs\imgui-docking;$(SolutionDir)External_libs\FastNoiseLite</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)External_libs\GLEW\glew-2.1.0\lib\Release\x64;$(SolutionDir)External_libs\GLFW\glfw-3.3.8.bin.WIN64\lib-vc2022;$(SolutionDir)External_libs\ASSIMP\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)External_libs\GLEW\glew-2.1.0\include;$(SolutionDir)External_libs\GLFW\glfw-3.3.8.bin.WIN64\include;$(SolutionDir)External_libs\glm_0_9_9_7\glm\;$(SolutionDir)External_libs\ASSIMP\include;$(SolutionDir)External_libs\glad\include;$(SolutionDir)External_libs\stb;$(SolutionDir)External_libs\miniaudio;$(SolutionDir)External_libs\tinyply-master\tinyply-master\source;$(SolutionDir)External_libs\plog\include;$(SolutionDir)External_libs\imgui-docking;$(SolutionDir)External_libs\FastNoiseLite</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)External_libs\GLEW\glew-2.1.0\lib\Release\x64;$(SolutionDir)External_libs\GLFW\glfw-3.3.8.bin.WIN64\lib-vc2022;$(SolutionDir)External_libs\ASSIMP\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="BackgroundMusicExample.cpp" />
+    <ClCompile Include="f_embeded_GLSL_source_fragment_shader.cpp" />
+    <ClCompile Include="f_embeded_GLSL_source_base_glsl.cpp" />
+    <ClCompile Include="CppCommponents\File.cpp" />
+    <ClCompile Include="CppCommponents\Folder.cpp" />
+    <ClCompile Include="CppCommponents\ImageRGBA.cpp" />
+    <ClCompile Include="CppCommponents\NameGenerators.cpp" />
+    <ClCompile Include="CppCommponents\Rectangle2d.cpp" />
+    <ClCompile Include="CppCommponents\Search_BreadthFirst_2d.cpp" />
+    <ClCompile Include="GenerateShaders.cpp" />
+    <ClCompile Include="GL.cpp" />
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="ImageUtils.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="MazeGenerate.cpp" />
+    <ClCompile Include="ShaderHot.cpp" />
+    <ClCompile Include="ShaderRuntime.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="f_embeded_GLSL_source_vertex_shader_exploring_0000.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+    <None Include="fragment_shader.glsl" />
+    <None Include="fragment_shader_exploring_0000.glsl" />
+    <None Include="fragment_shader_exploring_0001.glsl" />
+    <None Include="fragment_shader_exploring_0002.glsl" />
+    <None Include="fragment_shader_exploring_0003.glsl" />
+    <None Include="vertex_shader.glsl" />
+    <None Include="vertex_shader_exploring_0000.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CameraControl.h" />
+    <ClInclude Include="CppCommponents\File.h" />
+    <ClInclude Include="CppCommponents\Folder.h" />
+    <ClInclude Include="CppCommponents\ImageRGBA.h" />
+    <ClInclude Include="CppCommponents\json.h" />
+    <ClInclude Include="CppCommponents\NameGenerators.h" />
+    <ClInclude Include="CppCommponents\Random.h" />
+    <ClInclude Include="CppCommponents\Rectangle2d.h" />
+    <ClInclude Include="CppCommponents\Search_BreadthFirst_2d.h" />
+    <ClInclude Include="CppCommponents\TempleteUtils.h" />
+    <ClInclude Include="CubeGeometryBuilder.h" />
+    <ClInclude Include="DrawCommandsSingleMaterial.h" />
+    <ClInclude Include="Enviroment.h" />
+    <ClInclude Include="GenerateShaders.h" />
+    <ClInclude Include="GL.h" />
+    <ClInclude Include="Global_constants.h" />
+    <ClInclude Include="ImageUtils.h" />
+    <ClInclude Include="Materials.h" />
+    <ClInclude Include="Maze.h" />
+    <ClInclude Include="MazeCamera.h" />
+    <ClInclude Include="MazeGenerate.h" />
+    <ClInclude Include="Music_0.h" />
+    <ClInclude Include="Music_1.h" />
+    <ClInclude Include="Music_10.h" />
+    <ClInclude Include="Music_11.h" />
+    <ClInclude Include="Music_12.h" />
+    <ClInclude Include="Music_13.h" />
+    <ClInclude Include="Music_14.h" />
+    <ClInclude Include="Music_15.h" />
+    <ClInclude Include="Music_16.h" />
+    <ClInclude Include="Music_17.h" />
+    <ClInclude Include="Music_18.h" />
+    <ClInclude Include="Music_19.h" />
+    <ClInclude Include="Music_2.h" />
+    <ClInclude Include="Music_20.h" />
+    <ClInclude Include="Music_3.h" />
+    <ClInclude Include="Music_4.h" />
+    <ClInclude Include="Music_5.h" />
+    <ClInclude Include="Music_6.h" />
+    <ClInclude Include="Music_7.h" />
+    <ClInclude Include="Music_8.h" />
+    <ClInclude Include="Music_9.h" />
+    <ClInclude Include="Music_W_04_06_2025_20_43.h" />
+    <ClInclude Include="Music_W_04_06_2025_21_55.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ShaderHot.h" />
+    <ClInclude Include="ShaderRuntime.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Time.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TheExploration_0000.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="W_05_06_2025_17_00.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

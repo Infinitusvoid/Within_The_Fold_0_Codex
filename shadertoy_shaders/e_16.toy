@@ -1,0 +1,13 @@
+vec3 pal(float t){ return 0.55 + 0.45*cos(6.28318*(vec3(0.0,0.3,0.7)+t)); }
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = (fragCoord - 0.5*iResolution.xy) / iResolution.y;
+    float r = length(uv), a = atan(uv.y,uv.x);
+    float sweep = pow(max(0.0,cos(a-iTime)),18.0);
+    float rings = smoothstep(0.15,0.0,abs(sin(18.0*r - 4.0*iTime)));
+    float petals = smoothstep(0.35,0.0,abs(sin(5.0*a + 2.0*iTime))-0.15);
+    vec3 col = pal(0.1*iTime + r) * (0.25 + 1.5*rings + petals + sweep);
+    col *= exp(-1.1*r);
+    fragColor = vec4(col,1.0);
+}
