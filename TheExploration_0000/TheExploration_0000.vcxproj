@@ -168,6 +168,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+    <None Include="..\raymarching_3d_shaders\default_vertex.glsl" />
+    <None Include="..\raymarching_3d_shaders\maze_echo.glsl" />
+    <None Include="..\raymarching_3d_shaders\player_pulse.glsl" />
+    <None Include="..\raymarching_3d_shaders\README.md" />
+    <None Include="..\raymarching_3d_shaders\signal_lattice.glsl" />
     <None Include="fragment_shader.glsl" />
     <None Include="fragment_shader_exploring_0000.glsl" />
     <None Include="fragment_shader_exploring_0001.glsl" />
@@ -189,6 +194,7 @@
     <ClInclude Include="CppCommponents\TempleteUtils.h" />
     <ClInclude Include="CubeGeometryBuilder.h" />
     <ClInclude Include="DrawCommandsSingleMaterial.h" />
+    <ClInclude Include="EditableShaders.h" />
     <ClInclude Include="Enviroment.h" />
     <ClInclude Include="GenerateShaders.h" />
     <ClInclude Include="GL.h" />

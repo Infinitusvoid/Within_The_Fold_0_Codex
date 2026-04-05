@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cmath>
 #include <vector>
 #include <glad/glad.h>
@@ -24,8 +24,7 @@
 
 #include "Maze.h"
 #include "MazeCamera.h"
-
-#include "GenerateShaders.h"
+#include "EditableShaders.h"
 
 
 struct MazeGlobal
@@ -50,10 +49,6 @@ void mouse_callback_maze(GLFWwindow* window, double xpos, double ypos);
 #include "DrawCommandsSingleMaterial.h"
 #include "Enviroment.h"
 #include "CameraControl.h"
-
-std::string f_embeded_GLSL_source_base_glsl();
-std::string f_embeded_GLSL_source_vertex_shader_exploring_0000();
-std::string f_embeded_GLSL_source_fragment_shader();
 
 void f_audio_off();
 void f_audio_on();
@@ -92,57 +87,52 @@ namespace Engine_
         Enviroment_::Enviroment enviroment = Enviroment_::Enviroment_::generate_enviroment(engine.maze);
         std::vector<DrawCommandsSingleMaterial_::DrawCommandsSingleMaterial> drawcommands_enviroment = Enviroment_::Enviroment_::generate_draw_commands(enviroment);
 
-        
-
         std::chrono::steady_clock::time_point lastHotCheck = std::chrono::steady_clock::now();
-
-        
-
         f_audio_init();
-        
+
         bool first_loop = true;
+        int frame_index = 0;
 
         while (!glfwWindowShouldClose(engine.window))
         {
             engine.time.update();
             engine.camera_control.update(engine.window, *engine.camera, engine.time, engine.maze);
 
-            
-
-            // Set up the projection matrix (field of view, aspect ratio, near and far planes)
             glm::mat4 projection = glm::perspective(glm::radians(45.0f),
                 (float)global.SCR_WIDTH / (float)global.SCR_HEIGHT,
                 0.01f, 100.0f);
 
-
             GL_::clear_screen(0.1f, 0.6f, 0.9f);
-
-            
 
             f_audio_main_loop(engine.camera->Position.x, engine.camera->Position.y, engine.camera->Position.z);
 
-            // Compute view matrix from the camera
             glm::mat4 view = engine.camera->GetViewMatrix();
-
-            // Draw the floor
             glm::mat4 model = glm::mat4(1.0f);
+            const glm::vec2 viewport_size = glm::vec2((float)global.SCR_WIDTH, (float)global.SCR_HEIGHT);
 
             {
                 for (DrawCommandsSingleMaterial_::DrawCommandsSingleMaterial& draw_commands_single_material : drawcommands_enviroment)
                 {
-
-                    DrawCommandsSingleMaterial_::draw(draw_commands_single_material, model, view, projection, glfwGetTime(), engine.camera->Position);
+                    DrawCommandsSingleMaterial_::draw
+                    (
+                        draw_commands_single_material,
+                        model,
+                        view,
+                        projection,
+                        glfwGetTime(),
+                        engine.time.get_delta_time(),
+                        frame_index,
+                        viewport_size,
+                        engine.camera->Position
+                    );
                 }
             }
 
-
-            // The hot reloading of shaders
             {
                 auto now = std::chrono::steady_clock::now();
-                if (now - lastHotCheck > std::chrono::milliseconds(1000))
+                if (now - lastHotCheck > std::chrono::milliseconds(Global_constants_::shader_hot_reload_interval_ms))
                 {
                     lastHotCheck = now;
-                    // check all shaders in one go
                     for (auto& material : drawcommands_enviroment)
                     {
                         if (material.material.shader != nullptr)
@@ -153,8 +143,6 @@ namespace Engine_
                 }
             }
 
-
-            // print fps
             {
                 if (Global_constants_::print_out_fps)
                 {
@@ -170,6 +158,8 @@ namespace Engine_
                 first_loop = false;
                 engine.camera_control.toggleFullscreen(engine.window);
             }
+
+            frame_index++;
         }
 
         f_audio_clean_up();
@@ -181,23 +171,12 @@ Engine engine;
 
 int main()
 {
-    if (Global_constants_::use_runtime_generated_shaders_without_writing_files)
-    {
-        
-    }
-    else
-    {
-        Folder::create_folder_if_does_not_exist_already("generated_shaders");
-        File::writeFileIfNotExists("generated_shaders/base.glsl", f_embeded_GLSL_source_base_glsl());
-        File::writeFileIfNotExists("generated_shaders/vertex_shader_exploring_0000.glsl", f_embeded_GLSL_source_vertex_shader_exploring_0000());
-        File::writeFileIfNotExists("generated_shaders/fragment_shader.glsl", f_embeded_GLSL_source_fragment_shader());
-        GenerateShaders_::run_write_to_file_shaders();
-    }
+    EditableShaders_::ensure_editable_shader_files();
 
-    // start up message
     {
         std::cout << "Starting the game...\n";
-        std::cout << "Compiling shaders - this may take a minute or two.\n\n";
+        std::cout << "Loading editable shaders from ../raymarching_3d_shaders and ../shadertoy_shaders.\n";
+        std::cout << "Shader edits are hot reloaded while the game is running.\n\n";
 
         std::cout << "=== Controls ===\n";
         std::cout << "W, A, S, D : Move\n";
@@ -206,20 +185,16 @@ int main()
         std::cout << "M          : Toggle Sound On/Off\n";
         std::cout << "\n";
     }
-    
-
-
 
     Engine_::init(engine);
-
-    GenerateShaders_::generate_shader();
-
     Engine_::run(engine);
     return 0;
 }
 
 void framebuffer_size_callback_maze(GLFWwindow* window, int width, int height)
 {
+    global.SCR_WIDTH = width;
+    global.SCR_HEIGHT = height;
     GL_::update_viewport(window, width, height);
 }
 
@@ -238,3 +213,4 @@ void mouse_callback_maze(GLFWwindow* window, double xpos, double ypos)
         engine.camera->ProcessMouseMovement(xoffset, yoffset);
     }
 }
+

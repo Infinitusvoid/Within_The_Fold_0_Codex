@@ -1,11 +1,12 @@
 #pragma once
 
 #include "Global_constants.h"
+#include "EditableShaders.h"
+
+#include <iostream>
 
 namespace Enviroment_
 {
-    
-
     struct Cubes
     {
         struct Cube
@@ -20,8 +21,6 @@ namespace Enviroment_
 
             ElementType type;
 
-            // int material_id;
-
             int material_id_top;
             int material_id_bottom;
             int material_id_front;
@@ -32,7 +31,7 @@ namespace Enviroment_
 
     public:
         Cubes() :
-            data(grid_size_x* grid_size_y* grid_size_z)
+            data(grid_size_x * grid_size_y * grid_size_z)
         {
         }
 
@@ -42,40 +41,18 @@ namespace Enviroment_
             {
                 return &data[calculate_index(x, y, z)];
             }
-            else
-            {
-                return nullptr;
-            }
+
+            return nullptr;
         }
 
         bool valid_index(int x, int y, int z) const
         {
-            if (x < 0)
+            if (x < 0 || y < 0 || z < 0)
             {
                 return false;
             }
 
-            if (y < 0)
-            {
-                return false;
-            }
-
-            if (z < 0)
-            {
-                return false;
-            }
-
-            if (x >= grid_size_x)
-            {
-                return false;
-            }
-
-            if (y >= grid_size_y)
-            {
-                return false;
-            }
-
-            if (z >= grid_size_z)
+            if (x >= grid_size_x || y >= grid_size_y || z >= grid_size_z)
             {
                 return false;
             }
@@ -83,25 +60,26 @@ namespace Enviroment_
             return true;
         }
 
-
         int number_of_cubes()
         {
             return grid_size_x * grid_size_y * grid_size_z;
         }
 
-        // call f(cube_ptr, x, y, z) for every cube in order
         void loop(const std::function<void(Cube* cube, int x, int y, int z)>& f)
         {
-            int X = grid_size_x;
-            int Y = grid_size_y;
-            int layer = X * Y;
+            const int X = grid_size_x;
+            const int Y = grid_size_y;
+            const int layer = X * Y;
 
-            for (int z = 0; z < grid_size_z; ++z) {
-                int baseZ = z * layer;
-                for (int y = 0; y < Y; ++y) {
-                    int baseYZ = baseZ + y * X;
-                    for (int x = 0; x < X; ++x) {
-                        int idx = baseYZ + x;
+            for (int z = 0; z < grid_size_z; ++z)
+            {
+                const int baseZ = z * layer;
+                for (int y = 0; y < Y; ++y)
+                {
+                    const int baseYZ = baseZ + y * X;
+                    for (int x = 0; x < X; ++x)
+                    {
+                        const int idx = baseYZ + x;
                         f(&data[idx], x, y, z);
                     }
                 }
@@ -119,262 +97,124 @@ namespace Enviroment_
                 x;
         }
 
-
-
         static constexpr int grid_size_x = 66;
         static constexpr int grid_size_y = 11;
         static constexpr int grid_size_z = 66;
     };
 
-    
-
-    
-
     struct Enviroment
     {
-        Cubes  cubes;
+        Cubes cubes;
         Materials materials;
     };
 
+    inline std::vector<Texture_::Texture> create_default_material_textures()
+    {
+        std::vector<Texture_::Texture> textures;
+
+        {
+            const int texture_unit = 0;
+            Texture_::Texture texture;
+            Texture_::create(texture, texture_unit);
+            Texture_::create_procedural(texture, 32, 32, [](float u, float v)
+            {
+                uint8_t r = static_cast<uint8_t>(255 * u);
+                uint8_t g = static_cast<uint8_t>(255 * u);
+                uint8_t b = static_cast<uint8_t>(255 * u);
+                uint8_t a = 255;
+                return RGBA(r, g, b, a);
+            });
+            textures.push_back(texture);
+        }
+
+        {
+            const int texture_unit = 1;
+            Texture_::Texture texture;
+            Texture_::create(texture, texture_unit);
+            Texture_::create_procedural(texture, 32, 32, [](float u, float v)
+            {
+                uint8_t r = static_cast<uint8_t>(255 * u);
+                uint8_t g = static_cast<uint8_t>(255 * v);
+                uint8_t b = static_cast<uint8_t>(255 * (1.0f - u));
+                uint8_t a = 255;
+                return RGBA(r, g, b, a);
+            });
+            textures.push_back(texture);
+        }
+
+        return textures;
+    }
+
+    inline std::vector<int> build_editable_material_pool(Materials& materials)
+    {
+        EditableShaders_::ensure_editable_shader_files();
+
+        const std::string vertex_shader_path = EditableShaders_::default_vertex_shader_path();
+        const std::vector<std::string> fragment_shader_paths = EditableShaders_::discover_fragment_shader_paths();
+
+        std::vector<int> material_ids;
+        material_ids.reserve(fragment_shader_paths.size());
+
+        for (const std::string& fragment_shader_path : fragment_shader_paths)
+        {
+            std::vector<Texture_::Texture> textures = create_default_material_textures();
+            const int material_id = Materials_::create_material(materials, vertex_shader_path, fragment_shader_path, textures);
+            material_ids.push_back(material_id);
+            std::cout << "[EditableShaders] Loaded " << fragment_shader_path << "\n";
+        }
+
+        if (material_ids.empty())
+        {
+            std::cout << "[EditableShaders] No editable shaders were found.\n";
+        }
+        else
+        {
+            std::cout << "[EditableShaders] Loaded " << material_ids.size() << " editable fragment shaders.\n";
+        }
+
+        return material_ids;
+    }
+
     struct Room
     {
-        std::vector<int> materials_index_0;
-        std::vector<int> materials_index_1;
-        std::vector<int> materials_index_2;
-        std::vector<int> materials_index_3;
-
         int index = -1;
+        std::vector<int> material_ids;
 
-        int material_id = -1;
-
-        Room(int index, Materials& materials)
+        Room(int index, const std::vector<int>& material_ids)
         {
             this->index = index;
-            const int max_materials_per_room = 10;
-            
-            bool use_for_all_material_the_example_glsl = false;
-
-            auto f_generate_material =  [&](std::vector<int>& materials_index_n, const std::string& fregment_shader_filepath)
-            {
-                    std::vector< Texture_::Texture> textures;
-
-                    {
-
-                        {
-                            int texture_unit = 0;
-                            Texture_::Texture texture;
-                            Texture_::create(texture, texture_unit);
-                            Texture_::create_procedural(texture, 32, 32, [](float u, float v) {
-                                uint8_t r = 255 * u;
-                                uint8_t g = 255 * u;
-                                uint8_t b = 255 * u;
-                                uint8_t a = 255;
-                                return RGBA(r, g, b, a);
-                                });
-                            textures.push_back(texture);
-                        }
-
-                        {
-                            int texture_unit = 1;
-                            Texture_::Texture texture;
-                            Texture_::create(texture, texture_unit);
-                            Texture_::create_procedural(texture, 32, 32, [](float u, float v) {
-                                uint8_t r = 255 * u;
-                                uint8_t g = 255 * u;
-                                uint8_t b = 255 * u;
-                                uint8_t a = 255;
-                                return RGBA(r, g, b, a);
-                                });
-                            textures.push_back(texture);
-                        }
-                    }
-
-                    {
-                        const char* vertex_shader_path = "generated_shaders/vertex_shader_exploring_0000.glsl";
-                        std::string fragment_shader_path_example_glsl = "generated_shaders/example.glsl";
-
-                        int material_id = Materials_::create_material(materials, vertex_shader_path, fregment_shader_filepath, textures);
-                        materials_index_n.push_back(material_id);
-                    }
-                    
-            };
-
-            auto f_generate_material_with_runtime_shader = [&](std::vector<int>& materials_index_n)
-                {
-                    std::vector< Texture_::Texture> textures;
-
-                    {
-
-                        {
-                            int texture_unit = 0;
-                            Texture_::Texture texture;
-                            Texture_::create(texture, texture_unit);
-                            Texture_::create_procedural(texture, 32, 32, [](float u, float v) {
-                                uint8_t r = 255 * u;
-                                uint8_t g = 255 * u;
-                                uint8_t b = 255 * u;
-                                uint8_t a = 255;
-                                return RGBA(r, g, b, a);
-                                });
-                            textures.push_back(texture);
-                        }
-
-                        {
-                            int texture_unit = 1;
-                            Texture_::Texture texture;
-                            Texture_::create(texture, texture_unit);
-                            Texture_::create_procedural(texture, 32, 32, [](float u, float v) {
-                                uint8_t r = 255 * u;
-                                uint8_t g = 255 * u;
-                                uint8_t b = 255 * u;
-                                uint8_t a = 255;
-                                return RGBA(r, g, b, a);
-                                });
-                            textures.push_back(texture);
-                        }
-                    }
-
-                    {
-                        // int material_id = Materials_::create_material(materials, vertex_shader_path, fregment_shader_filepath, textures);
-                        ShaderRuntime* shader_runtime = GenerateShaders_::generate_shader();
-                        int material_id = Materials_::create_material_runtime(materials, shader_runtime, textures);
-                        materials_index_n.push_back(material_id);
-                    }
-
-                };
-
-            if (index == 0)
-            {
-                
-                if (Global_constants_::use_runtime_generated_shaders_without_writing_files)
-                {
-                    for (int i = 0; i < max_materials_per_room; i++)
-                    {
-                        f_generate_material_with_runtime_shader(materials_index_0);
-                    }
-                }
-                else
-                {
-                    std::vector<std::string> filepaths = Folder::getFilePathsInFolder("generated_shaders/room_0");
-                    for (int i = 0; i < std::min<int>(filepaths.size(), max_materials_per_room); i++)
-                    {
-                        f_generate_material(materials_index_0, filepaths[i]);
-                    }
-                }
-                
-            }
-            else if (index == 1)
-            {
-                if (Global_constants_::use_runtime_generated_shaders_without_writing_files)
-                {
-                    for (int i = 0; i < max_materials_per_room; i++)
-                    {
-                        f_generate_material_with_runtime_shader(materials_index_1);
-                    }
-                }
-                else
-                {
-                    std::vector<std::string> filepaths = Folder::getFilePathsInFolder("generated_shaders/room_1");
-
-                    for (int i = 0; i < std::min<int>(filepaths.size(), max_materials_per_room); i++)
-                    {
-                        f_generate_material(materials_index_1, filepaths[i]);
-                    }
-                }
-            }
-            else if (index == 2)
-            {
-               
-
-
-                if (Global_constants_::use_runtime_generated_shaders_without_writing_files)
-                {
-                    for (int i = 0; i < max_materials_per_room; i++)
-                    {
-                        f_generate_material_with_runtime_shader(materials_index_2);
-                    }
-                }
-                else
-                {
-                    std::vector<std::string> filepaths = Folder::getFilePathsInFolder("generated_shaders/room_2");
-                    for (int i = 0; i < std::min<int>(filepaths.size(), max_materials_per_room); i++)
-                    {
-                        f_generate_material(materials_index_2, filepaths[i]);
-                    }
-                }
-            }
-            else if (index == 3)
-            {
-              
-
-                if (Global_constants_::use_runtime_generated_shaders_without_writing_files)
-                {
-                    for (int i = 0; i < max_materials_per_room; i++)
-                    {
-                        f_generate_material_with_runtime_shader(materials_index_3);
-                    }
-                }
-                else
-                {
-                    std::vector<std::string> filepaths = Folder::getFilePathsInFolder("generated_shaders/room_3");
-                    for (int i = 0; i < max_materials_per_room; i++)
-                    {
-                        f_generate_material(materials_index_3, filepaths[i]);
-                    }
-                }
-            }
+            this->material_ids = material_ids;
         }
 
         int get_material(int x, int y, int z)
         {
-            if (index == 0)
+            if (material_ids.empty())
             {
-                return Random::random_element(materials_index_0);
-            }
-            else if (index == 1)
-            {
-                return Random::random_element(materials_index_1);
-            }
-            else if (index == 2)
-            {
-                return Random::random_element(materials_index_2);
-            }
-            else if (index == 3)
-            {
-                return Random::random_element(materials_index_3);
+                return 0;
             }
 
-            return material_id;
+            return Random::random_element(material_ids);
         }
-
-
     };
 
     namespace Cubes_
     {
-        void add_cube_with_room(Cubes& cubes, int x, int y, int z, Cubes::Cube::ElementType  element_type, Room& room)
+        void add_cube_with_room(Cubes& cubes, int x, int y, int z, Cubes::Cube::ElementType element_type, Room& room)
         {
             Cubes::Cube* const cube = cubes.get_cube(x, y, z);
-
-            // assert(cube == nullptr);
-
             if (cube == nullptr)
             {
                 return;
             }
 
-
-            
             cube->material_id_top = room.get_material(x, y, z);
             cube->material_id_bottom = room.get_material(x, y, z);
             cube->material_id_front = room.get_material(x, y, z);
             cube->material_id_back = room.get_material(x, y, z);
             cube->material_id_left = room.get_material(x, y, z);
             cube->material_id_right = room.get_material(x, y, z);
-
             cube->type = element_type;
         }
-
     }
 
     namespace Enviroment_
@@ -383,17 +223,20 @@ namespace Enviroment_
         {
             Enviroment enviroment;
 
+            const std::vector<int> material_pool = build_editable_material_pool(enviroment.materials);
 
-            Room room_0(0, enviroment.materials);
-            Room room_1(1, enviroment.materials);
-            Room room_2(2, enviroment.materials);
-            Room room_3(3, enviroment.materials);
+            Room room_0(0, material_pool);
+            Room room_1(1, material_pool);
+            Room room_2(2, material_pool);
+            Room room_3(3, material_pool);
 
-            enviroment.cubes.loop([](Cubes::Cube* cube, int x, int y, int z) { cube->type = Cubes::Cube::ElementType::empty; });
+            enviroment.cubes.loop([](Cubes::Cube* cube, int x, int y, int z)
+            {
+                cube->type = Cubes::Cube::ElementType::empty;
+            });
 
             for (int y = 0; y < maze.width; y++)
             {
-                
                 for (int x = 0; x < maze.height; x++)
                 {
                     int room_index = 0;
@@ -414,7 +257,6 @@ namespace Enviroment_
                     }
 
                     Room* active_room = nullptr;
-
                     {
                         if (room_index == 0)
                         {
@@ -436,25 +278,18 @@ namespace Enviroment_
                         assert(active_room != nullptr);
                     }
 
-
-
-
-
-
                     if (Maze_::isWall(maze, x, y))
                     {
                         Cubes_::add_cube_with_room(enviroment.cubes, x, 1, y, Cubes::Cube::ElementType::wall, *active_room);
                     }
                     else
                     {
-                        int height_at_x_y = Maze_::height_at(maze, x, y);
+                        const int height_at_x_y = Maze_::height_at(maze, x, y);
                         Cubes_::add_cube_with_room(enviroment.cubes, x, 0, y, Cubes::Cube::ElementType::wall, *active_room);
                         Cubes_::add_cube_with_room(enviroment.cubes, x, height_at_x_y + 1, y, Cubes::Cube::ElementType::wall, *active_room);
 
-
-                        // hight x - 1, y
                         {
-                            int height = Maze_::height_at(maze, x - 1, y);
+                            const int height = Maze_::height_at(maze, x - 1, y);
                             if (height < height_at_x_y)
                             {
                                 for (int i = height + 1; i <= height_at_x_y; i++)
@@ -464,9 +299,8 @@ namespace Enviroment_
                             }
                         }
 
-                        // hight x + 1, y
                         {
-                            int height = Maze_::height_at(maze, x + 1, y);
+                            const int height = Maze_::height_at(maze, x + 1, y);
                             if (height < height_at_x_y)
                             {
                                 for (int i = height + 1; i <= height_at_x_y; i++)
@@ -476,9 +310,8 @@ namespace Enviroment_
                             }
                         }
 
-                        // hight x, y + 1
                         {
-                            int height = Maze_::height_at(maze, x, y + 1);
+                            const int height = Maze_::height_at(maze, x, y + 1);
                             if (height < height_at_x_y)
                             {
                                 for (int i = height + 1; i <= height_at_x_y; i++)
@@ -488,9 +321,8 @@ namespace Enviroment_
                             }
                         }
 
-                        // hight x, y - 1
                         {
-                            int height = Maze_::height_at(maze, x, y - 1);
+                            const int height = Maze_::height_at(maze, x, y - 1);
                             if (height < height_at_x_y)
                             {
                                 for (int i = height + 1; i <= height_at_x_y; i++)
@@ -499,15 +331,9 @@ namespace Enviroment_
                                 }
                             }
                         }
-
-
-
                     }
                 }
             }
-
-            
-            
 
             return enviroment;
         }
@@ -516,155 +342,134 @@ namespace Enviroment_
         {
             std::vector<DrawCommandsSingleMaterial_::DrawCommandsSingleMaterial> drawcommands;
 
+            for (int index_material = 0; index_material < static_cast<int>(enviroment.materials.list.size()); index_material++)
             {
+                DrawCommandsSingleMaterial_::DrawCommandsSingleMaterial drawcommands_single_material;
+                drawcommands_single_material.material = enviroment.materials.list[index_material];
 
-                for (int index_material = 0; index_material < enviroment.materials.list.size(); index_material++)
+                auto f_loop = [&](Cubes::Cube* cube, int x, int y, int z)
                 {
-                    DrawCommandsSingleMaterial_::DrawCommandsSingleMaterial drawcommands_single_material;
-                    drawcommands_single_material.material = enviroment.materials.list[index_material];
+                    const glm::vec3 position_cube = glm::vec3(x, y - 1, z);
 
-                    auto f_loop = [&](Cubes::Cube* cube, int x, int y, int z)
+                    assert(cube != nullptr);
+
+                    if (cube->type == Cubes::Cube::ElementType::wall)
+                    {
+                        if (index_material == cube->material_id_top)
                         {
-
-                            const glm::vec position_cube = glm::vec3(x, y - 1, z);
-
-                            assert(cube != nullptr);
-
-                            if (cube->type == Cubes::Cube::ElementType::wall)
+                            bool need_wall_on_top = true;
                             {
-                                if (index_material == cube->material_id_top)
+                                Cubes::Cube* cube_above = enviroment.cubes.get_cube(x, y + 1, z);
+                                if (cube_above != nullptr && cube_above->type == Cubes::Cube::ElementType::wall)
                                 {
-                                    bool need_wall_on_top = true;
-                                    {
-                                        Cubes::Cube* cube_ = enviroment.cubes.get_cube(x, y + 1, z);
-                                        if (cube_ != nullptr)
-                                        {
-                                            if (cube_->type == Cubes::Cube::ElementType::wall)
-                                            {
-                                                need_wall_on_top = false;
-                                            }
-                                        }
-                                    }
-
-                                    if (need_wall_on_top)
-                                    {
-                                        drawcommands_single_material.cube_top_positions.push_back(position_cube);
-                                    }
-
+                                    need_wall_on_top = false;
                                 }
-
-                                if (index_material == cube->material_id_bottom)
-                                {
-                                    bool need_wall_on_bottom = true;
-                                    {
-                                        Cubes::Cube* cube_ = enviroment.cubes.get_cube(x, y - 1, z);
-                                        if (cube_ != nullptr && cube_->type == Cubes::Cube::ElementType::wall)
-                                        {
-                                            need_wall_on_bottom = false;
-                                        }
-                                    }
-
-                                    if (y == 0)
-                                    {
-                                        need_wall_on_bottom = false;
-                                    }
-
-
-                                    if (need_wall_on_bottom)
-                                    {
-                                        drawcommands_single_material.cube_bottom_positions.push_back(position_cube);
-                                    }
-
-                                }
-
-                                if (index_material == cube->material_id_front)
-                                {
-                                    bool needs_wall_on_front = true;
-                                    {
-                                        Cubes::Cube* cube_ = enviroment.cubes.get_cube(x, y, z + 1);
-                                        if (cube_ != nullptr && cube_->type == Cubes::Cube::ElementType::wall)
-                                        {
-                                            needs_wall_on_front = false;
-                                        }
-                                    }
-
-                                    if (needs_wall_on_front)
-                                    {
-                                        drawcommands_single_material.cube_front_positions.push_back(position_cube);
-                                    }
-
-                                }
-
-                                if (index_material == cube->material_id_back)
-                                {
-
-                                    bool needs_wall_on_back = true;
-                                    {
-                                        Cubes::Cube* cube_ = enviroment.cubes.get_cube(x, y, z - 1);
-                                        if (cube_ != nullptr && cube_->type == Cubes::Cube::ElementType::wall)
-                                        {
-                                            needs_wall_on_back = false;
-                                        }
-                                    }
-
-
-                                    if (needs_wall_on_back)
-                                    {
-                                        drawcommands_single_material.cube_back_positions.push_back(position_cube);
-                                    }
-
-                                }
-
-                                if (index_material == cube->material_id_left)
-                                {
-                                    bool needs_wall_on_left = true;
-                                    {
-                                        Cubes::Cube* cube_ = enviroment.cubes.get_cube(x - 1, y, z); // we need to add 1 to y as we to conteract the offset at start
-                                        if (cube_ != nullptr && cube_->type == Cubes::Cube::ElementType::wall)
-                                        {
-                                            needs_wall_on_left = false;
-                                        }
-                                    }
-
-                                    if (needs_wall_on_left)
-                                    {
-                                        drawcommands_single_material.cube_left_positions.push_back(position_cube);
-                                    }
-
-                                }
-
-                                if (index_material == cube->material_id_right)
-                                {
-                                    bool needs_wall_on_right = true;
-                                    {
-                                        Cubes::Cube* cube_ = enviroment.cubes.get_cube(x + 1, y, z);
-                                        if (cube_ != nullptr && cube_->type == Cubes::Cube::ElementType::wall)
-                                        {
-                                            needs_wall_on_right = false;
-                                        }
-                                    }
-
-                                    if (needs_wall_on_right)
-                                    {
-                                        drawcommands_single_material.cube_right_positions.push_back(position_cube);
-                                    }
-                                }
-
                             }
-                        };
 
-                    enviroment.cubes.loop(f_loop);
+                            if (need_wall_on_top)
+                            {
+                                drawcommands_single_material.cube_top_positions.push_back(position_cube);
+                            }
+                        }
 
-                    DrawCommandsSingleMaterial_::init(drawcommands_single_material);
+                        if (index_material == cube->material_id_bottom)
+                        {
+                            bool need_wall_on_bottom = true;
+                            {
+                                Cubes::Cube* cube_below = enviroment.cubes.get_cube(x, y - 1, z);
+                                if (cube_below != nullptr && cube_below->type == Cubes::Cube::ElementType::wall)
+                                {
+                                    need_wall_on_bottom = false;
+                                }
+                            }
 
-                    drawcommands.push_back(drawcommands_single_material);
-                }
+                            if (y == 0)
+                            {
+                                need_wall_on_bottom = false;
+                            }
 
+                            if (need_wall_on_bottom)
+                            {
+                                drawcommands_single_material.cube_bottom_positions.push_back(position_cube);
+                            }
+                        }
+
+                        if (index_material == cube->material_id_front)
+                        {
+                            bool needs_wall_on_front = true;
+                            {
+                                Cubes::Cube* cube_front = enviroment.cubes.get_cube(x, y, z + 1);
+                                if (cube_front != nullptr && cube_front->type == Cubes::Cube::ElementType::wall)
+                                {
+                                    needs_wall_on_front = false;
+                                }
+                            }
+
+                            if (needs_wall_on_front)
+                            {
+                                drawcommands_single_material.cube_front_positions.push_back(position_cube);
+                            }
+                        }
+
+                        if (index_material == cube->material_id_back)
+                        {
+                            bool needs_wall_on_back = true;
+                            {
+                                Cubes::Cube* cube_back = enviroment.cubes.get_cube(x, y, z - 1);
+                                if (cube_back != nullptr && cube_back->type == Cubes::Cube::ElementType::wall)
+                                {
+                                    needs_wall_on_back = false;
+                                }
+                            }
+
+                            if (needs_wall_on_back)
+                            {
+                                drawcommands_single_material.cube_back_positions.push_back(position_cube);
+                            }
+                        }
+
+                        if (index_material == cube->material_id_left)
+                        {
+                            bool needs_wall_on_left = true;
+                            {
+                                Cubes::Cube* cube_left = enviroment.cubes.get_cube(x - 1, y, z);
+                                if (cube_left != nullptr && cube_left->type == Cubes::Cube::ElementType::wall)
+                                {
+                                    needs_wall_on_left = false;
+                                }
+                            }
+
+                            if (needs_wall_on_left)
+                            {
+                                drawcommands_single_material.cube_left_positions.push_back(position_cube);
+                            }
+                        }
+
+                        if (index_material == cube->material_id_right)
+                        {
+                            bool needs_wall_on_right = true;
+                            {
+                                Cubes::Cube* cube_right = enviroment.cubes.get_cube(x + 1, y, z);
+                                if (cube_right != nullptr && cube_right->type == Cubes::Cube::ElementType::wall)
+                                {
+                                    needs_wall_on_right = false;
+                                }
+                            }
+
+                            if (needs_wall_on_right)
+                            {
+                                drawcommands_single_material.cube_right_positions.push_back(position_cube);
+                            }
+                        }
+                    }
+                };
+
+                enviroment.cubes.loop(f_loop);
+                DrawCommandsSingleMaterial_::init(drawcommands_single_material);
+                drawcommands.push_back(drawcommands_single_material);
             }
-
 
             return drawcommands;
         }
     }
-
 }

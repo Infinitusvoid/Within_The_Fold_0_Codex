@@ -5,288 +5,231 @@
   File.cpp
   Folder.cpp
   ImageRGBA.cpp
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12388,42): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12533,26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12536,41): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12537,41): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12538,41): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12539,41): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12388,42): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12533,26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12536,41): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12537,41): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12538,41): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12539,41): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
   NameGenerators.cpp
   Rectangle2d.cpp
   Search_BreadthFirst_2d.cpp
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\Search_BreadthFirst_2d.cpp(149,41): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\Search_BreadthFirst_2d.cpp(149,41): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   GenerateShaders.cpp
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(196,67): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(196,61): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(201,67): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(201,61): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(206,67): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(206,61): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(262,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(263,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(264,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(265,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(272,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(273,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(274,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(275,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,91): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,86): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,147): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,142): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,203): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,198): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,91): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,86): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,147): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,142): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,203): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,198): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,103): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,98): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,159): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,154): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,215): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,210): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1808,98): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1808,154): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1808,210): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1856,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1857,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1858,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1860,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1861,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1862,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1927,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1927,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1928,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1928,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1929,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1929,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1931,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1931,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1932,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1932,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1933,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1933,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2009,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2009,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2010,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2010,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2011,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2011,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2013,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2013,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2014,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2014,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2015,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2015,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2072,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2073,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2074,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2076,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2077,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2078,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2100,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2100,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2101,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2101,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2102,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2102,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2104,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2104,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2105,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2105,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2106,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2106,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2173,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2174,48): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2174,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2175,48): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2175,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2177,48): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2177,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2178,48): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2178,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2179,48): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2179,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2243,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2244,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2245,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2247,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2247,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2248,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2248,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2249,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2249,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2318,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2319,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2320,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2322,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2322,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2323,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2323,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2324,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2324,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2406,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2406,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2407,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2407,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2408,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2408,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2410,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2411,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2412,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2498,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2499,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2500,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2502,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2503,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2504,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(3561,101): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(3561,96): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(196,67): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(196,61): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(201,67): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(201,61): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(206,67): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(206,61): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(262,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(263,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(264,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(265,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(272,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(273,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(274,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(275,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,91): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,86): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,147): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,142): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,203): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1732,198): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,91): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,86): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,147): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,142): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,203): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1733,198): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,103): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,98): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,159): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,154): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,215): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1807,210): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1808,98): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1808,154): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1808,210): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1856,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1857,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1858,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1860,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1861,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1862,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1927,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1927,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1928,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1928,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1929,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1929,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1931,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1931,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1932,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1932,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1933,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(1933,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2009,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2009,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2010,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2010,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2011,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2011,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2013,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2013,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2014,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2014,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2015,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2015,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2072,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2073,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2074,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2076,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2077,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2078,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2100,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2100,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2101,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2101,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2102,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2102,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2104,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2104,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2105,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2105,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2106,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2106,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2173,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2174,48): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2174,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2175,48): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2175,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2177,48): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2177,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2178,48): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2178,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2179,48): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2179,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2243,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2244,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2245,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2247,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2247,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2248,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2248,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2249,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2249,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2318,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2319,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2320,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2322,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2322,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2323,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2323,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2324,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2324,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2406,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2406,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2407,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2407,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2408,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2408,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2410,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2411,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2412,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2498,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2499,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2500,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2502,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2503,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(2504,50): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(3561,101): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\GenerateShaders.cpp(3561,96): warning C4305: 'argument': truncation from 'double' to 'float'
   GL.cpp
   ImageUtils.cpp
   main.cpp
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\ImageUtils.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\ImageUtils.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Materials.h(37,38): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Materials.h(37,38): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Materials.h(50,38): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Materials.h(50,38): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(168,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(281,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(169,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(281,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(170,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(287,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(182,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(287,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(183,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(292,78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(184,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(292,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(213,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(303,78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(214,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(303,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(215,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(314,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(227,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(314,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(228,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(325,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(229,43): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(325,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(259,69): warning C4267: 'argument': conversion from 'size_t' to 'const _Ty', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(259,69): warning C4267:         with
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(259,69): warning C4267:         [
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(259,69): warning C4267:             _Ty=int
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(259,69): warning C4267:         ]
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(279,69): warning C4267: 'argument': conversion from 'size_t' to 'const _Ty', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(279,69): warning C4267:         with
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(279,69): warning C4267:         [
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(279,69): warning C4267:             _Ty=int
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(279,69): warning C4267:         ]
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(300,69): warning C4267: 'argument': conversion from 'size_t' to 'const _Ty', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(300,69): warning C4267:         with
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(300,69): warning C4267:         [
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(300,69): warning C4267:             _Ty=int
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(300,69): warning C4267:         ]
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(444,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(444,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(450,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(450,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(457,72): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(457,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(469,72): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(469,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(481,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(481,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(493,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(493,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(134,122): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(229,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(230,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(233,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(234,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(235,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(236,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(122,36): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(204,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(205,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(208,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(209,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(210,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(211,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Maze.cpp
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\ImageUtils.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\ImageUtils.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   (compiling source file 'Maze.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(176,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(177,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(215,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(215,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(216,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(216,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(217,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(217,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(218,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(218,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(219,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(219,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(176,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(177,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(215,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(215,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(216,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(216,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(217,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(217,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(218,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(218,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(219,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Maze.cpp(219,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   MazeGenerate.cpp
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\ImageUtils.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\ImageUtils.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   (compiling source file 'MazeGenerate.cpp')
   
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\MazeGenerate.cpp(380,64): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\MazeGenerate.cpp(380,64): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   ShaderHot.cpp
   ShaderRuntime.cpp
   Texture.cpp
   Time.cpp
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\Time.cpp(9,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Time.cpp(9,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   f_embeded_GLSL_source_vertex_shader_exploring_0000.cpp
   Generating Code...
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12394,1): warning C4715: 'ImageRGBA_::mix_with_pixel': not all control paths return a value
-C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\Folder.cpp(21,1): warning C4715: 'Folder::create_folder_if_does_not_exist_already': not all control paths return a value
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\ImageRGBA.cpp(12394,1): warning C4715: 'ImageRGBA_::mix_with_pixel': not all control paths return a value
+C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\CppCommponents\Folder.cpp(21,1): warning C4715: 'Folder::create_folder_if_does_not_exist_already': not all control paths return a value
   glad.c
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  TheExploration_0000.vcxproj -> C:\Users\Cosmos\Documents\GitHub\_Within_The_Fold_0_Codex\x64\Debug\Within_The_Fold_1_Codex.exe
+  TheExploration_0000.vcxproj -> C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\x64\Debug\Within_The_Fold_1_Codex.exe

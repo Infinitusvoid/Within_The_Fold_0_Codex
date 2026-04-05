@@ -113,6 +113,21 @@
     <None Include="..\README.md">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\raymarching_3d_shaders\default_vertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\raymarching_3d_shaders\maze_echo.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\raymarching_3d_shaders\player_pulse.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\raymarching_3d_shaders\README.md">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\raymarching_3d_shaders\signal_lattice.glsl">
+      <Filter>Shaders</Filter>
+    </None>
     <None Include="fragment_shader_exploring_0001.glsl">
       <Filter>Shaders</Filter>
     </None>
@@ -174,6 +189,9 @@
     </ClInclude>
     <ClInclude Include="DrawCommandsSingleMaterial.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditableShaders.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Maze.h">
       <Filter>Header Files\Engine</Filter>
