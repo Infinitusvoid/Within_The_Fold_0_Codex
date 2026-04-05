@@ -159,6 +159,21 @@ namespace Enviroment_
         {
             std::vector<Texture_::Texture> textures = create_default_material_textures();
             const int material_id = Materials_::create_material(materials, vertex_shader_path, fragment_shader_path, textures);
+            Materials::Material& material = materials.list.back();
+
+            if (material.shader == nullptr || material.shader->ID == 0)
+            {
+                for (Texture_::Texture& texture : material.textures)
+                {
+                    Texture_::free(texture);
+                }
+
+                delete material.shader;
+                materials.list.pop_back();
+                std::cout << "[EditableShaders] Skipped " << fragment_shader_path << " because it failed to compile.\n";
+                continue;
+            }
+
             material_ids.push_back(material_id);
             std::cout << "[EditableShaders] Loaded " << fragment_shader_path << "\n";
         }

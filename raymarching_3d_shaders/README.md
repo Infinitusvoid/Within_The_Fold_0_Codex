@@ -30,5 +30,8 @@ Common uniforms:
 Shadertoy notes:
 
 - `.toy` files should contain the shader body plus `mainImage`.
-- `gl_FragCoord.xy` is passed through as `fragCoord`.
+- `fragCoord` is object-local surface space, not screen space.
+- `iResolution` and `uResolution` both describe that local surface canvas for `.toy` shaders.
+- Real screen-space is still available through `gl_FragCoord.xy` or `uViewportSize`.
+- World/object data is exposed as `WorldPos`, `LocalPos`, `iWorldPos`, `iObjectPos`, `iLocalPos`, and `iSurfaceUV`.
 - The current player position is available as `uCamPos`, `uPlayerPos`, and `iPlayerPos`.

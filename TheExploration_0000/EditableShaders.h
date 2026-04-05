@@ -512,13 +512,32 @@ Shadertoy notes:
 
     inline void ensure_editable_shader_files()
     {
-        Folder::create_folder_if_does_not_exist_already(raymarching_shader_folder());
+        static bool already_ensured = false;
+        if (already_ensured)
+        {
+            return;
+        }
 
-        File::writeFileIfNotExists(default_vertex_shader_path(), default_vertex_shader_source());
-        File::writeFileIfNotExists(raymarching_shader_folder() + "/player_pulse.glsl", raymarching_shader_player_pulse());
-        File::writeFileIfNotExists(raymarching_shader_folder() + "/maze_echo.glsl", raymarching_shader_maze_echo());
-        File::writeFileIfNotExists(raymarching_shader_folder() + "/signal_lattice.glsl", raymarching_shader_signal_lattice());
-        File::writeFileIfNotExists(raymarching_shader_folder() + "/README.md", shader_reference_text());
+        already_ensured = true;
+
+        if (!std::filesystem::exists(raymarching_shader_folder()))
+        {
+            Folder::create_folder_if_does_not_exist_already(raymarching_shader_folder());
+        }
+
+        const auto write_if_missing = [](const std::string& filepath, const std::string& content)
+        {
+            if (!std::filesystem::exists(filepath))
+            {
+                File::writeFileIfNotExists(filepath, content);
+            }
+        };
+
+        write_if_missing(default_vertex_shader_path(), default_vertex_shader_source());
+        write_if_missing(raymarching_shader_folder() + "/player_pulse.glsl", raymarching_shader_player_pulse());
+        write_if_missing(raymarching_shader_folder() + "/maze_echo.glsl", raymarching_shader_maze_echo());
+        write_if_missing(raymarching_shader_folder() + "/signal_lattice.glsl", raymarching_shader_signal_lattice());
+        write_if_missing(raymarching_shader_folder() + "/README.md", shader_reference_text());
     }
 
     inline bool is_supported_fragment_shader_file(const std::filesystem::path& path)
@@ -586,7 +605,11 @@ Shadertoy notes:
             return true;
         }
 
-        if (trimmed.find("out vec4 fragColor") != std::string::npos || trimmed.find("out vec4 FragColor") != std::string::npos)
+        if
+        (
+            trimmed == "out vec4 fragColor;" ||
+            trimmed == "out vec4 FragColor;"
+        )
         {
             return true;
         }
@@ -596,7 +619,7 @@ Shadertoy notes:
             return false;
         }
 
-        static const std::array<std::string, 11> shadertoy_symbols =
+        static const std::array<std::string, 13> shadertoy_symbols =
         {
             "iResolution",
             "iTime",
@@ -608,7 +631,9 @@ Shadertoy notes:
             "iChannel2",
             "iChannel3",
             "iChannelResolution",
-            "iChannelTime"
+            "iChannelTime",
+            "uResolution",
+            "uViewportSize"
         };
 
         for (const std::string& symbol : shadertoy_symbols)
@@ -665,13 +690,13 @@ uniform vec3 uColor;
 uniform float time;
 uniform vec3 uCamPos;
 uniform vec3 uCubePos;
-uniform vec2 uResolution;
+uniform vec2 uViewportSize;
+uniform vec2 uSurfaceResolution;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-uniform vec3 iResolution;
 uniform float iTime;
 uniform float iTimeDelta;
 uniform int iFrame;
@@ -680,6 +705,14 @@ uniform vec3 iPlayerPos;
 uniform vec3 uPlayerPos;
 uniform vec3 iChannelResolution[4];
 uniform float iChannelTime[4];
+
+vec3 iResolution = vec3(1024.0, 1024.0, 1.0);
+
+#define iWorldPos WorldPos
+#define iObjectPos LocalPos
+#define iLocalPos LocalPos
+#define iSurfaceUV TexCoord
+#define uResolution iResolution.xy
 
 vec3 getPlayerPosition()
 {
@@ -701,6 +734,26 @@ vec3 getLocalPosition()
     return LocalPos;
 }
 
+vec2 getScreenFragCoord()
+{
+    return gl_FragCoord.xy;
+}
+
+vec2 getSurfaceFragCoord()
+{
+    return TexCoord * iResolution.xy;
+}
+
+vec2 getCenteredSurfaceCoord()
+{
+    return (TexCoord - 0.5) * iResolution.xy;
+}
+
+vec2 getViewportResolution()
+{
+    return uViewportSize;
+}
+
 // Source file:
 // )GLSL") + filepath + R"GLSL(
 
@@ -709,8 +762,10 @@ vec3 getLocalPosition()
 
 void main()
 {
+    iResolution = vec3(max(uSurfaceResolution, vec2(1.0)), 1.0);
+
     vec4 color = vec4(0.0);
-    mainImage(color, gl_FragCoord.xy);
+    mainImage(color, getSurfaceFragCoord());
     FragColor = color;
 }
 )GLSL";

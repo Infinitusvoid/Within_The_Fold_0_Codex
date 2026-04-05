@@ -152,6 +152,13 @@ namespace DrawCommandsSingleMaterial_
         return glm::vec3(viewport_size, 1.0f);
     }
 
+    inline glm::vec2 editable_surface_resolution()
+    {
+        // Shadertoy adapters use a stable virtual canvas so effects stay attached
+        // to cube/object space instead of inheriting the current window size.
+        return glm::vec2(1024.0f, 1024.0f);
+    }
+
     inline void bind_shared_uniforms_hot
     (
         const ShaderHot_::ShaderHot& shader,
@@ -213,6 +220,7 @@ namespace DrawCommandsSingleMaterial_
         ShaderHot_::setInt(shader, "iFrame", frame_index);
         ShaderHot_::setVec2(shader, "uResolution", viewport_size);
         ShaderHot_::setVec2(shader, "uViewportSize", viewport_size);
+        ShaderHot_::setVec2(shader, "uSurfaceResolution", editable_surface_resolution());
         ShaderHot_::setVec3(shader, "iResolution", glm::vec3(viewport_size, 1.0f));
         ShaderHot_::setVec4(shader, "iMouse", glm::vec4(0.0f));
         ShaderHot_::setVec3(shader, "uCamPos", camera_position);
@@ -282,6 +290,7 @@ namespace DrawCommandsSingleMaterial_
         ShaderRuntime_::setInt(shader, "iFrame", frame_index);
         ShaderRuntime_::setVec2(shader, "uResolution", viewport_size);
         ShaderRuntime_::setVec2(shader, "uViewportSize", viewport_size);
+        ShaderRuntime_::setVec2(shader, "uSurfaceResolution", editable_surface_resolution());
         ShaderRuntime_::setVec3(shader, "iResolution", glm::vec3(viewport_size, 1.0f));
         ShaderRuntime_::setVec4(shader, "iMouse", glm::vec4(0.0f));
         ShaderRuntime_::setVec3(shader, "uCamPos", camera_position);

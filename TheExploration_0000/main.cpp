@@ -98,8 +98,11 @@ namespace Engine_
             engine.time.update();
             engine.camera_control.update(engine.window, *engine.camera, engine.time, engine.maze);
 
+            const int safe_width = std::max(global.SCR_WIDTH, 1);
+            const int safe_height = std::max(global.SCR_HEIGHT, 1);
+
             glm::mat4 projection = glm::perspective(glm::radians(45.0f),
-                (float)global.SCR_WIDTH / (float)global.SCR_HEIGHT,
+                (float)safe_width / (float)safe_height,
                 0.01f, 100.0f);
 
             GL_::clear_screen(0.1f, 0.6f, 0.9f);
@@ -108,7 +111,7 @@ namespace Engine_
 
             glm::mat4 view = engine.camera->GetViewMatrix();
             glm::mat4 model = glm::mat4(1.0f);
-            const glm::vec2 viewport_size = glm::vec2((float)global.SCR_WIDTH, (float)global.SCR_HEIGHT);
+            const glm::vec2 viewport_size = glm::vec2((float)safe_width, (float)safe_height);
 
             {
                 for (DrawCommandsSingleMaterial_::DrawCommandsSingleMaterial& draw_commands_single_material : drawcommands_enviroment)
@@ -193,9 +196,9 @@ int main()
 
 void framebuffer_size_callback_maze(GLFWwindow* window, int width, int height)
 {
-    global.SCR_WIDTH = width;
-    global.SCR_HEIGHT = height;
-    GL_::update_viewport(window, width, height);
+    global.SCR_WIDTH = std::max(width, 1);
+    global.SCR_HEIGHT = std::max(height, 1);
+    GL_::update_viewport(window, global.SCR_WIDTH, global.SCR_HEIGHT);
 }
 
 void mouse_callback_maze(GLFWwindow* window, double xpos, double ypos)
