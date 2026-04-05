@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 
 #include <chrono>
 #include <filesystem>
@@ -20,6 +21,7 @@ namespace ShaderHot_
 		std::filesystem::file_time_type last_frag_write;
 
 		int ID = 0;
+		mutable std::unordered_map<std::string, int> uniform_locations;
 	};
 
 	void load(ShaderHot& shader);

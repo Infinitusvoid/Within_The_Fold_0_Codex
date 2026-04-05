@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Global_constants.h"
+#include <array>
 
 namespace DrawCommandsSingleMaterial_
 {
@@ -12,6 +13,56 @@ namespace DrawCommandsSingleMaterial_
             GL_::VBO vbo;
             GLsizei vertexCount;
         };
+
+        struct Frustum
+        {
+            std::array<glm::vec4, 6> planes;
+        };
+
+        inline glm::vec4 normalize_plane(const glm::vec4& plane)
+        {
+            const float plane_length = glm::length(glm::vec3(plane));
+            if (plane_length <= 0.0001f)
+            {
+                return plane;
+            }
+
+            return plane / plane_length;
+        }
+
+        inline Frustum build_frustum(const glm::mat4& view_projection)
+        {
+            const glm::vec4 row_x = glm::vec4(view_projection[0][0], view_projection[1][0], view_projection[2][0], view_projection[3][0]);
+            const glm::vec4 row_y = glm::vec4(view_projection[0][1], view_projection[1][1], view_projection[2][1], view_projection[3][1]);
+            const glm::vec4 row_z = glm::vec4(view_projection[0][2], view_projection[1][2], view_projection[2][2], view_projection[3][2]);
+            const glm::vec4 row_w = glm::vec4(view_projection[0][3], view_projection[1][3], view_projection[2][3], view_projection[3][3]);
+
+            Frustum frustum;
+            frustum.planes[0] = normalize_plane(row_w + row_x);
+            frustum.planes[1] = normalize_plane(row_w - row_x);
+            frustum.planes[2] = normalize_plane(row_w + row_y);
+            frustum.planes[3] = normalize_plane(row_w - row_y);
+            frustum.planes[4] = normalize_plane(row_w + row_z);
+            frustum.planes[5] = normalize_plane(row_w - row_z);
+            return frustum;
+        }
+
+        inline bool is_cube_visible(const Frustum& frustum, const glm::vec3& cube_origin, float scale)
+        {
+            const glm::vec3 cube_center = cube_origin * scale + glm::vec3(0.5f * scale);
+            const float cube_radius = 0.9f * scale;
+
+            for (const glm::vec4& plane : frustum.planes)
+            {
+                const float signed_distance = glm::dot(glm::vec3(plane), cube_center) + plane.w;
+                if (signed_distance < -cube_radius)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         void init(Mesh& mesh, const std::vector<float>& vertices)
         {
@@ -45,13 +96,22 @@ namespace DrawCommandsSingleMaterial_
             GL_::VAO_::unbind();
         }
 
-        void draw_mesh_instances(const Mesh& mesh, const ShaderHot_::ShaderHot& shader, const std::vector<glm::vec3>& positions, const float scale)
+        void draw_mesh_instances(const Mesh& mesh, const ShaderHot_::ShaderHot& shader, const std::vector<glm::vec3>& positions, const Frustum& frustum, const float scale)
         {
-            ShaderHot_::use(shader);
+            if (positions.empty())
+            {
+                return;
+            }
+
             GL_::VAO_::bind(mesh.vao);
 
             for (int i = 0; i < static_cast<int>(positions.size()); i++)
             {
+                if (!is_cube_visible(frustum, positions[i], scale))
+                {
+                    continue;
+                }
+
                 glm::mat4 model = glm::mat4(1.0f);
                 model = glm::translate(model, positions[i] * scale);
                 model = glm::scale(model, glm::vec3(scale));
@@ -66,13 +126,22 @@ namespace DrawCommandsSingleMaterial_
             GL_::VAO_::unbind();
         }
 
-        void draw_mesh_instances_runtime_shader(const Mesh& mesh, const ShaderRuntime& shader, const std::vector<glm::vec3>& positions, const float scale)
+        void draw_mesh_instances_runtime_shader(const Mesh& mesh, const ShaderRuntime& shader, const std::vector<glm::vec3>& positions, const Frustum& frustum, const float scale)
         {
-            ShaderRuntime_::use(shader);
+            if (positions.empty())
+            {
+                return;
+            }
+
             GL_::VAO_::bind(mesh.vao);
 
             for (int i = 0; i < static_cast<int>(positions.size()); i++)
             {
+                if (!is_cube_visible(frustum, positions[i], scale))
+                {
+                    continue;
+                }
+
                 glm::mat4 model = glm::mat4(1.0f);
                 model = glm::translate(model, positions[i] * scale);
                 model = glm::scale(model, glm::vec3(scale));
@@ -367,6 +436,8 @@ namespace DrawCommandsSingleMaterial_
         const glm::vec3& camera_position
     )
     {
+        const Mesh_::Frustum frustum = Mesh_::build_frustum(projection * view);
+
         if (Global_constants_::use_runtime_generated_shaders_without_writing_files)
         {
             if (drawcommands.material.shader_runtime != nullptr)
@@ -386,13 +457,13 @@ namespace DrawCommandsSingleMaterial_
                     camera_position
                 );
 
-                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_full_positions, *drawcommands.material.shader_runtime, drawcommands.cube_full_positions, 1.0f);
-                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_top_positions, *drawcommands.material.shader_runtime, drawcommands.cube_top_positions, 1.0f);
-                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_bottom_positions, *drawcommands.material.shader_runtime, drawcommands.cube_bottom_positions, 1.0f);
-                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_front_positions, *drawcommands.material.shader_runtime, drawcommands.cube_front_positions, 1.0f);
-                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_back_positions, *drawcommands.material.shader_runtime, drawcommands.cube_back_positions, 1.0f);
-                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_left_positions, *drawcommands.material.shader_runtime, drawcommands.cube_left_positions, 1.0f);
-                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_right_positions, *drawcommands.material.shader_runtime, drawcommands.cube_right_positions, 1.0f);
+                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_full_positions, *drawcommands.material.shader_runtime, drawcommands.cube_full_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_top_positions, *drawcommands.material.shader_runtime, drawcommands.cube_top_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_bottom_positions, *drawcommands.material.shader_runtime, drawcommands.cube_bottom_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_front_positions, *drawcommands.material.shader_runtime, drawcommands.cube_front_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_back_positions, *drawcommands.material.shader_runtime, drawcommands.cube_back_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_left_positions, *drawcommands.material.shader_runtime, drawcommands.cube_left_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances_runtime_shader(drawcommands.mesh_right_positions, *drawcommands.material.shader_runtime, drawcommands.cube_right_positions, frustum, 1.0f);
             }
         }
         else
@@ -414,13 +485,13 @@ namespace DrawCommandsSingleMaterial_
                     camera_position
                 );
 
-                Mesh_::draw_mesh_instances(drawcommands.mesh_full_positions, *drawcommands.material.shader, drawcommands.cube_full_positions, 1.0f);
-                Mesh_::draw_mesh_instances(drawcommands.mesh_top_positions, *drawcommands.material.shader, drawcommands.cube_top_positions, 1.0f);
-                Mesh_::draw_mesh_instances(drawcommands.mesh_bottom_positions, *drawcommands.material.shader, drawcommands.cube_bottom_positions, 1.0f);
-                Mesh_::draw_mesh_instances(drawcommands.mesh_front_positions, *drawcommands.material.shader, drawcommands.cube_front_positions, 1.0f);
-                Mesh_::draw_mesh_instances(drawcommands.mesh_back_positions, *drawcommands.material.shader, drawcommands.cube_back_positions, 1.0f);
-                Mesh_::draw_mesh_instances(drawcommands.mesh_left_positions, *drawcommands.material.shader, drawcommands.cube_left_positions, 1.0f);
-                Mesh_::draw_mesh_instances(drawcommands.mesh_right_positions, *drawcommands.material.shader, drawcommands.cube_right_positions, 1.0f);
+                Mesh_::draw_mesh_instances(drawcommands.mesh_full_positions, *drawcommands.material.shader, drawcommands.cube_full_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances(drawcommands.mesh_top_positions, *drawcommands.material.shader, drawcommands.cube_top_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances(drawcommands.mesh_bottom_positions, *drawcommands.material.shader, drawcommands.cube_bottom_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances(drawcommands.mesh_front_positions, *drawcommands.material.shader, drawcommands.cube_front_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances(drawcommands.mesh_back_positions, *drawcommands.material.shader, drawcommands.cube_back_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances(drawcommands.mesh_left_positions, *drawcommands.material.shader, drawcommands.cube_left_positions, frustum, 1.0f);
+                Mesh_::draw_mesh_instances(drawcommands.mesh_right_positions, *drawcommands.material.shader, drawcommands.cube_right_positions, frustum, 1.0f);
             }
         }
     }
