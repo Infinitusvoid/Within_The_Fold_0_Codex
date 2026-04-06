@@ -8,8 +8,8 @@
     "shader_mix": {
         "max_raymarching_shaders": 0,
         "max_shadertoy_shaders": 0,
-        "raymarching_weight": 0.7,
-        "shadertoy_weight": 0.3
+        "raymarching_weight": 0.3,
+        "shadertoy_weight": 0.7
     },
     "startup": {
         "print_shader_summary": true,
