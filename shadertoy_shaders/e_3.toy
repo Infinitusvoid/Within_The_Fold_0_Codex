@@ -1,9 +1,0 @@
-void mainImage(out vec4 fragColor, in vec2 fragCoord)
-{
-    vec2 uv = (fragCoord - 0.5 * iResolution.xy) / iResolution.y;
-    float d = length(uv);
-    float r = 0.25 + 0.08 * sin(iTime * 3.0);
-
-    float ring = smoothstep(r + 0.01, r, d) - smoothstep(r, r - 0.01, d);
-    fragColor = vec4(vec3(ring), 1.0);
-}

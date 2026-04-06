@@ -48,6 +48,11 @@ namespace EditableShaders_
         return value.rfind(prefix, 0) == 0;
     }
 
+    inline int count_char(const std::string& value, char target)
+    {
+        return static_cast<int>(std::count(value.begin(), value.end(), target));
+    }
+
     inline std::string default_vertex_shader_source()
     {
         return R"GLSL(#version 330 core
@@ -581,9 +586,26 @@ Shadertoy notes:
         return filepaths;
     }
 
-    inline bool is_shadertoy_shader_path(const std::string& filepath)
+    inline bool is_path_inside_shadertoy_folder(const std::string& filepath)
     {
-        return std::filesystem::path(filepath).extension() == ".toy";
+        const std::string file_string = std::filesystem::path(filepath).lexically_normal().generic_string();
+        const std::string folder_string = std::filesystem::path(shadertoy_shader_folder()).lexically_normal().generic_string();
+        return file_string.find(folder_string) != std::string::npos;
+    }
+
+    inline bool source_looks_like_shadertoy(const std::string& source)
+    {
+        return source.find("mainImage") != std::string::npos;
+    }
+
+    inline bool is_shadertoy_shader_path(const std::string& filepath, const std::string& source)
+    {
+        if (std::filesystem::path(filepath).extension() == ".toy")
+        {
+            return true;
+        }
+
+        return is_path_inside_shadertoy_folder(filepath) && source_looks_like_shadertoy(source);
     }
 
     inline bool should_strip_shadertoy_line(const std::string& line)
@@ -619,12 +641,13 @@ Shadertoy notes:
             return false;
         }
 
-        static const std::array<std::string, 13> shadertoy_symbols =
+        static const std::array<std::string, 14> shadertoy_symbols =
         {
             "iResolution",
             "iTime",
             "iTimeDelta",
             "iFrame",
+            "iDate",
             "iMouse",
             "iChannel0",
             "iChannel1",
@@ -652,9 +675,52 @@ Shadertoy notes:
         std::istringstream input(source);
         std::ostringstream output;
         std::string line;
+        bool skipping_main_wrapper = false;
+        bool waiting_for_main_brace = false;
+        int main_brace_depth = 0;
 
         while (std::getline(input, line))
         {
+            const std::string trimmed = trim_copy(line);
+
+            if (!skipping_main_wrapper && starts_with(trimmed, "void main(") && !starts_with(trimmed, "void mainImage"))
+            {
+                skipping_main_wrapper = true;
+                waiting_for_main_brace = (count_char(line, '{') == 0);
+                main_brace_depth = count_char(line, '{') - count_char(line, '}');
+                output << "\n";
+
+                if (!waiting_for_main_brace && main_brace_depth <= 0)
+                {
+                    skipping_main_wrapper = false;
+                    main_brace_depth = 0;
+                }
+
+                continue;
+            }
+
+            if (skipping_main_wrapper)
+            {
+                main_brace_depth += count_char(line, '{');
+                main_brace_depth -= count_char(line, '}');
+                output << "\n";
+
+                if (waiting_for_main_brace)
+                {
+                    if (count_char(line, '{') > 0)
+                    {
+                        waiting_for_main_brace = false;
+                    }
+                }
+                else if (main_brace_depth <= 0)
+                {
+                    skipping_main_wrapper = false;
+                    main_brace_depth = 0;
+                }
+
+                continue;
+            }
+
             if (should_strip_shadertoy_line(line))
             {
                 output << "\n";
@@ -700,6 +766,7 @@ uniform mat4 projection;
 uniform float iTime;
 uniform float iTimeDelta;
 uniform int iFrame;
+uniform vec4 iDate;
 uniform vec4 iMouse;
 uniform vec3 iPlayerPos;
 uniform vec3 uPlayerPos;
@@ -711,7 +778,6 @@ vec3 iResolution = vec3(1024.0, 1024.0, 1.0);
 #define iWorldPos WorldPos
 #define iObjectPos LocalPos
 #define iLocalPos LocalPos
-#define iSurfaceUV TexCoord
 #define uResolution iResolution.xy
 
 vec3 getPlayerPosition()
@@ -734,6 +800,45 @@ vec3 getLocalPosition()
     return LocalPos;
 }
 
+vec3 getLocalCenteredPosition()
+{
+    return LocalPos - vec3(0.5);
+}
+
+vec3 getWorldNormal()
+{
+    return normalize(cross(dFdx(WorldPos), dFdy(WorldPos)));
+}
+
+vec3 getLocalNormal()
+{
+    return normalize(cross(dFdx(LocalPos), dFdy(LocalPos)));
+}
+
+vec2 getObjectSurfaceUV()
+{
+    vec3 p = clamp(LocalPos, vec3(0.0), vec3(1.0));
+    vec3 n = getLocalNormal();
+    vec3 an = abs(n);
+
+    if (an.x > an.y && an.x > an.z)
+    {
+        return (n.x >= 0.0) ? vec2(1.0 - p.z, p.y) : vec2(p.z, p.y);
+    }
+
+    if (an.y > an.z)
+    {
+        return (n.y >= 0.0) ? vec2(p.x, 1.0 - p.z) : vec2(p.x, p.z);
+    }
+
+    return (n.z >= 0.0) ? vec2(p.x, p.y) : vec2(1.0 - p.x, p.y);
+}
+
+#define iSurfaceUV getObjectSurfaceUV()
+#define iWorldNormal getWorldNormal()
+#define iObjectNormal getLocalNormal()
+#define iLocalNormal getLocalNormal()
+
 vec2 getScreenFragCoord()
 {
     return gl_FragCoord.xy;
@@ -741,12 +846,12 @@ vec2 getScreenFragCoord()
 
 vec2 getSurfaceFragCoord()
 {
-    return TexCoord * iResolution.xy;
+    return getObjectSurfaceUV() * iResolution.xy;
 }
 
 vec2 getCenteredSurfaceCoord()
 {
-    return (TexCoord - 0.5) * iResolution.xy;
+    return (getObjectSurfaceUV() - 0.5) * iResolution.xy;
 }
 
 vec2 getViewportResolution()
@@ -785,7 +890,7 @@ void main()
     inline std::string load_fragment_shader_source(const std::string& filepath)
     {
         const std::string source = File::readFileToString(filepath);
-        if (is_shadertoy_shader_path(filepath))
+        if (is_shadertoy_shader_path(filepath, source))
         {
             return wrap_shadertoy_fragment_source(filepath, source);
         }

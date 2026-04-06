@@ -2,6 +2,7 @@
 
 #include "Global_constants.h"
 #include <array>
+#include <ctime>
 
 namespace DrawCommandsSingleMaterial_
 {
@@ -228,6 +229,24 @@ namespace DrawCommandsSingleMaterial_
         return glm::vec2(1024.0f, 1024.0f);
     }
 
+    inline glm::vec4 current_shader_date()
+    {
+        std::time_t raw_time = std::time(nullptr);
+        std::tm local_time{};
+        localtime_s(&local_time, &raw_time);
+
+        const float seconds_since_midnight =
+            static_cast<float>(local_time.tm_hour * 3600 + local_time.tm_min * 60 + local_time.tm_sec);
+
+        return glm::vec4
+        (
+            static_cast<float>(local_time.tm_year + 1900),
+            static_cast<float>(local_time.tm_mon + 1),
+            static_cast<float>(local_time.tm_mday),
+            seconds_since_midnight
+        );
+    }
+
     inline void bind_shared_uniforms_hot
     (
         const ShaderHot_::ShaderHot& shader,
@@ -287,6 +306,7 @@ namespace DrawCommandsSingleMaterial_
         ShaderHot_::setFloat(shader, "iTimeDelta", delta_time);
         ShaderHot_::setInt(shader, "uFrame", frame_index);
         ShaderHot_::setInt(shader, "iFrame", frame_index);
+        ShaderHot_::setVec4(shader, "iDate", current_shader_date());
         ShaderHot_::setVec2(shader, "uResolution", viewport_size);
         ShaderHot_::setVec2(shader, "uViewportSize", viewport_size);
         ShaderHot_::setVec2(shader, "uSurfaceResolution", editable_surface_resolution());
@@ -357,6 +377,7 @@ namespace DrawCommandsSingleMaterial_
         ShaderRuntime_::setFloat(shader, "iTimeDelta", delta_time);
         ShaderRuntime_::setInt(shader, "uFrame", frame_index);
         ShaderRuntime_::setInt(shader, "iFrame", frame_index);
+        ShaderRuntime_::setVec4(shader, "iDate", current_shader_date());
         ShaderRuntime_::setVec2(shader, "uResolution", viewport_size);
         ShaderRuntime_::setVec2(shader, "uViewportSize", viewport_size);
         ShaderRuntime_::setVec2(shader, "uSurfaceResolution", editable_surface_resolution());
