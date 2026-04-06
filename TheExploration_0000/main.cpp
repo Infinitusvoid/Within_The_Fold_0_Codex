@@ -177,8 +177,14 @@ int main()
     EditableShaders_::ensure_editable_shader_files();
 
     {
+        const std::string& raymarching_folder = EditableShaders_::raymarching_shader_folder();
+        const std::string& shadertoy_folder = EditableShaders_::shadertoy_shader_folder();
+
         std::cout << "Starting the game...\n";
-        std::cout << "Loading editable shaders from ../raymarching_3d_shaders and ../shadertoy_shaders.\n";
+        std::cout << "Editable shaders are loaded from these folders:\n";
+        std::cout << "  Raymarching : " << raymarching_folder << "\n";
+        std::cout << "  Shadertoy   : " << shadertoy_folder << "\n";
+        std::cout << "Missing folders are created automatically with starter shaders.\n";
         std::cout << "Shader edits are hot reloaded while the game is running.\n\n";
 
         std::cout << "=== Controls ===\n";

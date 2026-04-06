@@ -6,18 +6,25 @@ namespace Folder
 	int create_folder_if_does_not_exist_already(std::string folderPath)
 	{
 		namespace fs = std::filesystem;
-		if (!fs::exists(folderPath)) {
-			if (fs::create_directory(folderPath)) {
-				std::cout << "Folder created successfully." << std::endl;
+		std::error_code error;
+		if (!fs::exists(folderPath, error)) {
+			if (fs::create_directories(folderPath, error)) {
+				std::cout << "Folder created successfully: " << folderPath << std::endl;
+				return 0;
 			}
-			else {
-				std::cerr << "Failed to create folder." << std::endl;
+
+			if (error) {
+				std::cerr << "Failed to create folder '" << folderPath << "': " << error.message() << std::endl;
 				return 1;
 			}
 		}
-		else {
-			std::cout << "Folder already exists." << std::endl;
+
+		if (error) {
+			std::cerr << "Failed to inspect folder '" << folderPath << "': " << error.message() << std::endl;
+			return 1;
 		}
+
+		return 0;
 	}
 
 	std::vector<std::string> getFilePathsInFolder(const std::string& folderPath)

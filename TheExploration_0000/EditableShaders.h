@@ -7,20 +7,136 @@
 #include <string>
 #include <vector>
 
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#ifdef APIENTRY
+#pragma push_macro("APIENTRY")
+#undef APIENTRY
+#define EDITABLE_SHADERS_RESTORE_APIENTRY
+#endif
+#include <Windows.h>
+#ifdef EDITABLE_SHADERS_RESTORE_APIENTRY
+#pragma pop_macro("APIENTRY")
+#undef EDITABLE_SHADERS_RESTORE_APIENTRY
+#endif
+#endif
+
 #include "CppCommponents\File.h"
 #include "CppCommponents\Folder.h"
 
 namespace EditableShaders_
 {
+    inline const std::filesystem::path& executable_directory_path()
+    {
+        static const std::filesystem::path directory = []
+        {
+#ifdef _WIN32
+            std::vector<char> buffer(MAX_PATH, '\0');
+
+            while (true)
+            {
+                const DWORD size = GetModuleFileNameA(nullptr, buffer.data(), static_cast<DWORD>(buffer.size()));
+                if (size == 0)
+                {
+                    return std::filesystem::current_path();
+                }
+
+                if (size < buffer.size() - 1)
+                {
+                    return std::filesystem::path(std::string(buffer.data(), size)).parent_path();
+                }
+
+                buffer.resize(buffer.size() * 2, '\0');
+            }
+#else
+            return std::filesystem::current_path();
+#endif
+        }();
+
+        return directory;
+    }
+
+    inline std::vector<std::filesystem::path> raymarching_shader_folder_candidates()
+    {
+        std::vector<std::filesystem::path> candidates;
+        candidates.push_back(executable_directory_path() / "raymarching_3d_shaders");
+
+        const std::filesystem::path repo_style_candidate =
+            executable_directory_path().parent_path().parent_path() / "raymarching_3d_shaders";
+
+        if (repo_style_candidate != candidates.front())
+        {
+            candidates.push_back(repo_style_candidate);
+        }
+
+        return candidates;
+    }
+
+    inline std::vector<std::filesystem::path> shadertoy_shader_folder_candidates()
+    {
+        std::vector<std::filesystem::path> candidates;
+        candidates.push_back(executable_directory_path() / "shadertoy_shaders");
+
+        const std::filesystem::path repo_style_candidate =
+            executable_directory_path().parent_path().parent_path() / "shadertoy_shaders";
+
+        if (repo_style_candidate != candidates.front())
+        {
+            candidates.push_back(repo_style_candidate);
+        }
+
+        return candidates;
+    }
+
+    inline const std::filesystem::path& raymarching_shader_folder_path()
+    {
+        static const std::filesystem::path folder = []
+        {
+            for (const std::filesystem::path& candidate : raymarching_shader_folder_candidates())
+            {
+                std::error_code error;
+                if (std::filesystem::exists(candidate, error) && std::filesystem::is_directory(candidate, error))
+                {
+                    return candidate;
+                }
+            }
+
+            return raymarching_shader_folder_candidates().front();
+        }();
+
+        return folder;
+    }
+
+    inline const std::filesystem::path& shadertoy_shader_folder_path()
+    {
+        static const std::filesystem::path folder = []
+        {
+            for (const std::filesystem::path& candidate : shadertoy_shader_folder_candidates())
+            {
+                std::error_code error;
+                if (std::filesystem::exists(candidate, error) && std::filesystem::is_directory(candidate, error))
+                {
+                    return candidate;
+                }
+            }
+
+            return shadertoy_shader_folder_candidates().front();
+        }();
+
+        return folder;
+    }
+
     inline const std::string& raymarching_shader_folder()
     {
-        static const std::string folder = "../raymarching_3d_shaders";
+        static const std::string folder = raymarching_shader_folder_path().string();
         return folder;
     }
 
     inline const std::string& shadertoy_shader_folder()
     {
-        static const std::string folder = "../shadertoy_shaders";
+        static const std::string folder = shadertoy_shader_folder_path().string();
         return folder;
     }
 
@@ -481,10 +597,11 @@ void main()
         return R"TXT(# Editable Shader Contract
 
 Files in this folder are loaded directly at runtime and hot reloaded when they change.
+In a portable build, this folder lives next to the executable.
 
 - `default_vertex.glsl` is the shared vertex shader used by every editable fragment shader.
 - `*.glsl` files here are treated as full OpenGL fragment shaders.
-- `../shadertoy_shaders/*.toy` files are wrapped automatically so `mainImage(out vec4, in vec2)` works in-game.
+- `shadertoy_shaders/*.toy` files from the sibling folder are wrapped automatically so `mainImage(out vec4, in vec2)` works in-game.
 
 Common fragment inputs:
 
@@ -515,6 +632,41 @@ Shadertoy notes:
 )TXT";
     }
 
+    inline std::string shadertoy_reference_text()
+    {
+        return R"TXT(# Shadertoy Shader Folder
+
+Files in this folder are loaded directly at runtime and hot reloaded when they change.
+In a portable build, this folder lives next to the executable.
+
+- Use `.toy` or `.glsl` files that define `mainImage(out vec4 fragColor, in vec2 fragCoord)`.
+- The game wraps your file so you can use Shadertoy-style uniforms such as `iTime`, `iResolution`, and `iChannel0`.
+- `fragCoord` uses the current cube face as a local surface instead of the whole window.
+- Helper functions such as `getLocalCenteredPosition()` and `getWorldPosition()` are available in the wrapper.
+)TXT";
+    }
+
+    inline std::string shadertoy_shader_starter()
+    {
+        return R"GLSL(void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = (fragCoord - 0.5 * iResolution.xy) / max(iResolution.y, 1.0);
+    vec3 local = getLocalCenteredPosition();
+
+    float rings = sin(length(local.xz) * 24.0 - iTime * 3.0);
+    float bands = sin((uv.x + uv.y) * 10.0 + iTime * 1.4);
+    float glow = 0.5 + 0.5 * sin(iTime * 2.0 + local.y * 12.0);
+
+    vec3 base = 0.5 + 0.5 * cos(iTime + vec3(0.0, 2.0, 4.0) + length(local) * 8.0);
+    vec3 color = base * (0.35 + 0.65 * glow);
+    color += 0.15 * vec3(0.2, 0.8, 1.0) * rings;
+    color += 0.10 * vec3(1.0, 0.4, 0.2) * bands;
+
+    fragColor = vec4(color, 1.0);
+}
+)GLSL";
+    }
+
     inline void ensure_editable_shader_files()
     {
         static bool already_ensured = false;
@@ -530,6 +682,11 @@ Shadertoy notes:
             Folder::create_folder_if_does_not_exist_already(raymarching_shader_folder());
         }
 
+        if (!std::filesystem::exists(shadertoy_shader_folder()))
+        {
+            Folder::create_folder_if_does_not_exist_already(shadertoy_shader_folder());
+        }
+
         const auto write_if_missing = [](const std::string& filepath, const std::string& content)
         {
             if (!std::filesystem::exists(filepath))
@@ -543,6 +700,8 @@ Shadertoy notes:
         write_if_missing(raymarching_shader_folder() + "/maze_echo.glsl", raymarching_shader_maze_echo());
         write_if_missing(raymarching_shader_folder() + "/signal_lattice.glsl", raymarching_shader_signal_lattice());
         write_if_missing(raymarching_shader_folder() + "/README.md", shader_reference_text());
+        write_if_missing(shadertoy_shader_folder() + "/starter.toy", shadertoy_shader_starter());
+        write_if_missing(shadertoy_shader_folder() + "/README.md", shadertoy_reference_text());
     }
 
     inline bool is_supported_fragment_shader_file(const std::filesystem::path& path)

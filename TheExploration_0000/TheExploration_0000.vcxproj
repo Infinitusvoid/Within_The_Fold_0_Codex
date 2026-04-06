@@ -239,6 +239,13 @@
   <ItemGroup>
     <Image Include="W_05_06_2025_17_00.ico" />
   </ItemGroup>
+  <Target Name="CopyPortableRuntimeFiles" AfterTargets="Build">
+    <ItemGroup>
+      <PortableRuntimeFiles Include="$(ProjectDir)glew32.dll" Condition="Exists('$(ProjectDir)glew32.dll')" />
+      <PortableRuntimeFiles Include="$(ProjectDir)assimp-vc140-mt.dll" Condition="Exists('$(ProjectDir)assimp-vc140-mt.dll')" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PortableRuntimeFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" Condition="'@(PortableRuntimeFiles)' != ''" />
+  </Target>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

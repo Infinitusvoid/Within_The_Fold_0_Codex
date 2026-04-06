@@ -1,61 +1,7 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: The intermediate directory (x64\Release\) contains files shared from another project (TheExploration_0000.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ShaderHot.cpp
-  main.cpp
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\ImageUtils.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Materials.h(37,38): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Materials.h(50,38): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(296,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(296,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(302,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(302,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(307,78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(307,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(318,78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(318,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(329,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(329,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(340,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\Enviroment.h(340,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(125,36): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(207,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(208,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(211,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(212,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(213,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\TheExploration_0000\main.cpp(214,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Generating code
-  336 of 4983 functions ( 6.7%) were compiled, the rest were copied from previous compilation.
-    159 functions were new in current compilation
-    361 functions had inline decision re-evaluated but remain unchanged
+  0 of 4983 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   TheExploration_0000.vcxproj -> C:\Users\Cosmos\Documents\GitHub\Within_The_Fold_0_Codex\x64\Release\Within_The_Fold_1_Codex.exe
