@@ -1,0 +1,18 @@
+{
+    "_help": {
+        "max_limits": "Use 0 to load all shaders from that folder. Use a positive number to cap how many are used.",
+        "portable_layout": "This settings.json file and the shader folders live next to the executable in a portable build.",
+        "weights": "Higher weight means that shader family is chosen more often for maze materials."
+    },
+    "schema_version": 1,
+    "shader_mix": {
+        "max_raymarching_shaders": 0,
+        "max_shadertoy_shaders": 0,
+        "raymarching_weight": 0.7,
+        "shadertoy_weight": 0.3
+    },
+    "startup": {
+        "print_shader_summary": true,
+        "seed_example_shaders_if_missing": true
+    }
+}

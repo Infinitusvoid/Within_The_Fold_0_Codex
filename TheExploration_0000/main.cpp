@@ -177,14 +177,28 @@ int main()
     EditableShaders_::ensure_editable_shader_files();
 
     {
+        const EditableShaders_::EditableShaderSettings& editable_shader_settings = EditableShaders_::settings();
         const std::string& raymarching_folder = EditableShaders_::raymarching_shader_folder();
         const std::string& shadertoy_folder = EditableShaders_::shadertoy_shader_folder();
 
         std::cout << "Starting the game...\n";
+        std::cout << "Settings file          : " << EditableShaders_::settings_file_path().string() << "\n";
         std::cout << "Editable shaders are loaded from these folders:\n";
         std::cout << "  Raymarching : " << raymarching_folder << "\n";
         std::cout << "  Shadertoy   : " << shadertoy_folder << "\n";
-        std::cout << "Missing folders are created automatically with starter shaders.\n";
+        std::cout
+            << "Shader mix weights     : raymarching="
+            << editable_shader_settings.shader_mix.raymarching_weight
+            << ", shadertoy="
+            << editable_shader_settings.shader_mix.shadertoy_weight
+            << "\n";
+        std::cout
+            << "Shader caps            : raymarching="
+            << EditableShaders_::shader_limit_label(editable_shader_settings.shader_mix.max_raymarching_shaders)
+            << ", shadertoy="
+            << EditableShaders_::shader_limit_label(editable_shader_settings.shader_mix.max_shadertoy_shaders)
+            << "\n";
+        std::cout << "Missing folders are created automatically, and starter shaders are seeded if enabled in settings.json.\n";
         std::cout << "Shader edits are hot reloaded while the game is running.\n\n";
 
         std::cout << "=== Controls ===\n";

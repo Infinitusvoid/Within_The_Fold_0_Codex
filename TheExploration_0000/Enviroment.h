@@ -145,20 +145,28 @@ namespace Enviroment_
         return textures;
     }
 
-    inline std::vector<int> build_editable_material_pool(Materials& materials)
+    struct EditableMaterialPool
+    {
+        std::vector<int> raymarching_material_ids;
+        std::vector<int> shadertoy_material_ids;
+    };
+
+    inline EditableMaterialPool build_editable_material_pool(Materials& materials)
     {
         EditableShaders_::ensure_editable_shader_files();
 
         const std::string vertex_shader_path = EditableShaders_::default_vertex_shader_path();
-        const std::vector<std::string> fragment_shader_paths = EditableShaders_::discover_fragment_shader_paths();
+        const EditableShaders_::EditableShaderSettings& editable_shader_settings = EditableShaders_::settings();
+        const EditableShaders_::ShaderDiscoveryResult shader_discovery = EditableShaders_::discover_fragment_shader_entries();
 
-        std::vector<int> material_ids;
-        material_ids.reserve(fragment_shader_paths.size());
+        EditableMaterialPool material_pool;
+        material_pool.raymarching_material_ids.reserve(shader_discovery.raymarching.size());
+        material_pool.shadertoy_material_ids.reserve(shader_discovery.shadertoy.size());
 
-        for (const std::string& fragment_shader_path : fragment_shader_paths)
+        for (const EditableShaders_::ShaderFileEntry& shader_entry : shader_discovery.all)
         {
             std::vector<Texture_::Texture> textures = create_default_material_textures();
-            const int material_id = Materials_::create_material(materials, vertex_shader_path, fragment_shader_path, textures);
+            const int material_id = Materials_::create_material(materials, vertex_shader_path, shader_entry.filepath, textures);
             Materials::Material& material = materials.list.back();
 
             if (material.shader == nullptr || material.shader->ID == 0)
@@ -170,45 +178,147 @@ namespace Enviroment_
 
                 delete material.shader;
                 materials.list.pop_back();
-                std::cout << "[EditableShaders] Skipped " << fragment_shader_path << " because it failed to compile.\n";
+                std::cout << "[EditableShaders] Skipped " << shader_entry.filepath << " because it failed to compile.\n";
                 continue;
             }
 
-            material_ids.push_back(material_id);
-            std::cout << "[EditableShaders] Loaded " << fragment_shader_path << "\n";
+            if (shader_entry.family == EditableShaders_::ShaderFamily::shadertoy)
+            {
+                material_pool.shadertoy_material_ids.push_back(material_id);
+            }
+            else
+            {
+                material_pool.raymarching_material_ids.push_back(material_id);
+            }
+
+            if (editable_shader_settings.startup.print_shader_summary)
+            {
+                std::cout
+                    << "[EditableShaders] Loaded "
+                    << EditableShaders_::shader_family_name(shader_entry.family)
+                    << " shader: "
+                    << shader_entry.filepath
+                    << "\n";
+            }
         }
 
-        if (material_ids.empty())
+        const size_t total_loaded_materials =
+            material_pool.raymarching_material_ids.size() +
+            material_pool.shadertoy_material_ids.size();
+
+        if (total_loaded_materials == 0)
         {
             std::cout << "[EditableShaders] No editable shaders were found.\n";
         }
         else
         {
-            std::cout << "[EditableShaders] Loaded " << material_ids.size() << " editable fragment shaders.\n";
+            std::cout
+                << "[EditableShaders] Material mix weights -> raymarching: "
+                << editable_shader_settings.shader_mix.raymarching_weight
+                << ", shadertoy: "
+                << editable_shader_settings.shader_mix.shadertoy_weight
+                << "\n";
+
+            std::cout
+                << "[EditableShaders] Shader caps -> raymarching: "
+                << EditableShaders_::shader_limit_label(editable_shader_settings.shader_mix.max_raymarching_shaders)
+                << ", shadertoy: "
+                << EditableShaders_::shader_limit_label(editable_shader_settings.shader_mix.max_shadertoy_shaders)
+                << "\n";
+
+            std::cout
+                << "[EditableShaders] Loaded "
+                << material_pool.raymarching_material_ids.size()
+                << " raymarching shaders";
+
+            if (shader_discovery.raymarching_found != material_pool.raymarching_material_ids.size())
+            {
+                std::cout << " (from " << shader_discovery.raymarching_found << " found)";
+            }
+
+            std::cout
+                << " and "
+                << material_pool.shadertoy_material_ids.size()
+                << " shadertoy shaders";
+
+            if (shader_discovery.shadertoy_found != material_pool.shadertoy_material_ids.size())
+            {
+                std::cout << " (from " << shader_discovery.shadertoy_found << " found)";
+            }
+
+            std::cout << ".\n";
         }
 
-        return material_ids;
+        return material_pool;
     }
 
     struct Room
     {
         int index = -1;
-        std::vector<int> material_ids;
+        std::vector<int> raymarching_material_ids;
+        std::vector<int> shadertoy_material_ids;
+        double raymarching_weight = 0.70;
+        double shadertoy_weight = 0.30;
 
-        Room(int index, const std::vector<int>& material_ids)
+        Room
+        (
+            int index,
+            const EditableMaterialPool& material_pool,
+            const EditableShaders_::EditableShaderSettings& editable_shader_settings
+        )
         {
             this->index = index;
-            this->material_ids = material_ids;
+            this->raymarching_material_ids = material_pool.raymarching_material_ids;
+            this->shadertoy_material_ids = material_pool.shadertoy_material_ids;
+            this->raymarching_weight = editable_shader_settings.shader_mix.raymarching_weight;
+            this->shadertoy_weight = editable_shader_settings.shader_mix.shadertoy_weight;
         }
 
         int get_material(int x, int y, int z)
         {
-            if (material_ids.empty())
+            (void)x;
+            (void)y;
+            (void)z;
+
+            const bool has_raymarching = !raymarching_material_ids.empty();
+            const bool has_shadertoy = !shadertoy_material_ids.empty();
+
+            if (!has_raymarching && !has_shadertoy)
             {
                 return 0;
             }
 
-            return Random::random_element(material_ids);
+            if (has_raymarching && !has_shadertoy)
+            {
+                return Random::random_element(raymarching_material_ids);
+            }
+
+            if (!has_raymarching && has_shadertoy)
+            {
+                return Random::random_element(shadertoy_material_ids);
+            }
+
+            const float safe_raymarching_weight =
+                (raymarching_weight > 0.0) ? static_cast<float>(raymarching_weight) : 0.0f;
+
+            const float safe_shadertoy_weight =
+                (shadertoy_weight > 0.0) ? static_cast<float>(shadertoy_weight) : 0.0f;
+
+            const float total_weight = safe_raymarching_weight + safe_shadertoy_weight;
+            if (total_weight <= 0.0f)
+            {
+                return Random::random_bool()
+                    ? Random::random_element(raymarching_material_ids)
+                    : Random::random_element(shadertoy_material_ids);
+            }
+
+            const float chosen_weight = Random::random_float(0.0f, total_weight);
+            if (chosen_weight < safe_raymarching_weight)
+            {
+                return Random::random_element(raymarching_material_ids);
+            }
+
+            return Random::random_element(shadertoy_material_ids);
         }
     };
 
@@ -237,13 +347,14 @@ namespace Enviroment_
         Enviroment generate_enviroment(Maze_::Maze maze)
         {
             Enviroment enviroment;
+            const EditableShaders_::EditableShaderSettings& editable_shader_settings = EditableShaders_::settings();
 
-            const std::vector<int> material_pool = build_editable_material_pool(enviroment.materials);
+            const EditableMaterialPool material_pool = build_editable_material_pool(enviroment.materials);
 
-            Room room_0(0, material_pool);
-            Room room_1(1, material_pool);
-            Room room_2(2, material_pool);
-            Room room_3(3, material_pool);
+            Room room_0(0, material_pool, editable_shader_settings);
+            Room room_1(1, material_pool, editable_shader_settings);
+            Room room_2(2, material_pool, editable_shader_settings);
+            Room room_3(3, material_pool, editable_shader_settings);
 
             enviroment.cubes.loop([](Cubes::Cube* cube, int x, int y, int z)
             {

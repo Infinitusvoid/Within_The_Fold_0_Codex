@@ -2,7 +2,9 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <filesystem>
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -25,6 +27,7 @@
 
 #include "CppCommponents\File.h"
 #include "CppCommponents\Folder.h"
+#include "CppCommponents\json.h"
 
 namespace EditableShaders_
 {
@@ -144,6 +147,217 @@ namespace EditableShaders_
     {
         static const std::string filepath = raymarching_shader_folder() + "/default_vertex.glsl";
         return filepath;
+    }
+
+    enum class ShaderFamily
+    {
+        raymarching,
+        shadertoy
+    };
+
+    struct ShaderMixSettings
+    {
+        double raymarching_weight = 0.70;
+        double shadertoy_weight = 0.30;
+        int max_raymarching_shaders = 0;
+        int max_shadertoy_shaders = 0;
+    };
+
+    struct StartupSettings
+    {
+        bool seed_example_shaders_if_missing = true;
+        bool print_shader_summary = true;
+    };
+
+    struct EditableShaderSettings
+    {
+        int schema_version = 1;
+        ShaderMixSettings shader_mix;
+        StartupSettings startup;
+    };
+
+    struct ShaderFileEntry
+    {
+        std::string filepath;
+        ShaderFamily family = ShaderFamily::raymarching;
+    };
+
+    struct ShaderDiscoveryResult
+    {
+        std::vector<ShaderFileEntry> raymarching;
+        std::vector<ShaderFileEntry> shadertoy;
+        std::vector<ShaderFileEntry> all;
+
+        size_t raymarching_found = 0;
+        size_t shadertoy_found = 0;
+    };
+
+    inline const std::filesystem::path& settings_file_path()
+    {
+        static const std::filesystem::path path = executable_directory_path() / "settings.json";
+        return path;
+    }
+
+    inline std::string shader_family_name(ShaderFamily family)
+    {
+        switch (family)
+        {
+        case ShaderFamily::shadertoy:
+            return "shadertoy";
+        case ShaderFamily::raymarching:
+        default:
+            return "raymarching";
+        }
+    }
+
+    inline std::string shader_limit_label(int value)
+    {
+        if (value <= 0)
+        {
+            return "all";
+        }
+
+        return std::to_string(value);
+    }
+
+    template<typename T>
+    inline void read_json_value_if_present(const nlohmann::json& object, const char* key, T& output)
+    {
+        const auto found = object.find(key);
+        if (found == object.end() || found->is_null())
+        {
+            return;
+        }
+
+        try
+        {
+            output = found->get<T>();
+        }
+        catch (const std::exception&)
+        {
+        }
+    }
+
+    inline void sanitize_settings(EditableShaderSettings& editable_shader_settings)
+    {
+        if (!std::isfinite(editable_shader_settings.shader_mix.raymarching_weight) || editable_shader_settings.shader_mix.raymarching_weight < 0.0)
+        {
+            editable_shader_settings.shader_mix.raymarching_weight = 0.70;
+        }
+
+        if (!std::isfinite(editable_shader_settings.shader_mix.shadertoy_weight) || editable_shader_settings.shader_mix.shadertoy_weight < 0.0)
+        {
+            editable_shader_settings.shader_mix.shadertoy_weight = 0.30;
+        }
+
+        if
+        (
+            editable_shader_settings.shader_mix.raymarching_weight <= 0.0 &&
+            editable_shader_settings.shader_mix.shadertoy_weight <= 0.0
+        )
+        {
+            editable_shader_settings.shader_mix.raymarching_weight = 0.70;
+            editable_shader_settings.shader_mix.shadertoy_weight = 0.30;
+        }
+
+        if (editable_shader_settings.shader_mix.max_raymarching_shaders < 0)
+        {
+            editable_shader_settings.shader_mix.max_raymarching_shaders = 0;
+        }
+
+        if (editable_shader_settings.shader_mix.max_shadertoy_shaders < 0)
+        {
+            editable_shader_settings.shader_mix.max_shadertoy_shaders = 0;
+        }
+    }
+
+    inline nlohmann::json settings_to_json(const EditableShaderSettings& editable_shader_settings)
+    {
+        return
+        {
+            { "_help", {
+                { "weights", "Higher weight means that shader family is chosen more often for maze materials." },
+                { "max_limits", "Use 0 to load all shaders from that folder. Use a positive number to cap how many are used." },
+                { "portable_layout", "This settings.json file and the shader folders live next to the executable in a portable build." }
+            }},
+            { "schema_version", editable_shader_settings.schema_version },
+            { "shader_mix", {
+                { "raymarching_weight", editable_shader_settings.shader_mix.raymarching_weight },
+                { "shadertoy_weight", editable_shader_settings.shader_mix.shadertoy_weight },
+                { "max_raymarching_shaders", editable_shader_settings.shader_mix.max_raymarching_shaders },
+                { "max_shadertoy_shaders", editable_shader_settings.shader_mix.max_shadertoy_shaders }
+            }},
+            { "startup", {
+                { "seed_example_shaders_if_missing", editable_shader_settings.startup.seed_example_shaders_if_missing },
+                { "print_shader_summary", editable_shader_settings.startup.print_shader_summary }
+            }}
+        };
+    }
+
+    inline std::string default_settings_json_text()
+    {
+        EditableShaderSettings editable_shader_settings;
+        return settings_to_json(editable_shader_settings).dump(4) + "\n";
+    }
+
+    inline EditableShaderSettings load_settings()
+    {
+        EditableShaderSettings editable_shader_settings;
+        const std::string filepath = settings_file_path().string();
+
+        if (!std::filesystem::exists(settings_file_path()))
+        {
+            File::writeFileIfNotExists(filepath, default_settings_json_text());
+            return editable_shader_settings;
+        }
+
+        const std::string source = File::readFileToString(filepath);
+        if (source.empty())
+        {
+            std::cerr << "[EditableShaders] Settings file was empty. Using defaults: " << filepath << "\n";
+            return editable_shader_settings;
+        }
+
+        try
+        {
+            const nlohmann::json root = nlohmann::json::parse(source);
+
+            read_json_value_if_present(root, "schema_version", editable_shader_settings.schema_version);
+
+            const auto shader_mix_found = root.find("shader_mix");
+            if (shader_mix_found != root.end() && shader_mix_found->is_object())
+            {
+                read_json_value_if_present(*shader_mix_found, "raymarching_weight", editable_shader_settings.shader_mix.raymarching_weight);
+                read_json_value_if_present(*shader_mix_found, "shadertoy_weight", editable_shader_settings.shader_mix.shadertoy_weight);
+                read_json_value_if_present(*shader_mix_found, "max_raymarching_shaders", editable_shader_settings.shader_mix.max_raymarching_shaders);
+                read_json_value_if_present(*shader_mix_found, "max_shadertoy_shaders", editable_shader_settings.shader_mix.max_shadertoy_shaders);
+            }
+
+            const auto startup_found = root.find("startup");
+            if (startup_found != root.end() && startup_found->is_object())
+            {
+                read_json_value_if_present(*startup_found, "seed_example_shaders_if_missing", editable_shader_settings.startup.seed_example_shaders_if_missing);
+                read_json_value_if_present(*startup_found, "print_shader_summary", editable_shader_settings.startup.print_shader_summary);
+            }
+        }
+        catch (const std::exception& error)
+        {
+            std::cerr
+                << "[EditableShaders] Failed to parse settings file: "
+                << filepath
+                << "\n"
+                << error.what()
+                << "\nUsing defaults.\n";
+        }
+
+        sanitize_settings(editable_shader_settings);
+        return editable_shader_settings;
+    }
+
+    inline const EditableShaderSettings& settings()
+    {
+        static const EditableShaderSettings editable_shader_settings = load_settings();
+        return editable_shader_settings;
     }
 
     inline std::string trim_copy(const std::string& value)
@@ -676,6 +890,7 @@ In a portable build, this folder lives next to the executable.
         }
 
         already_ensured = true;
+        const EditableShaderSettings& editable_shader_settings = settings();
 
         if (!std::filesystem::exists(raymarching_shader_folder()))
         {
@@ -696,12 +911,15 @@ In a portable build, this folder lives next to the executable.
         };
 
         write_if_missing(default_vertex_shader_path(), default_vertex_shader_source());
-        write_if_missing(raymarching_shader_folder() + "/player_pulse.glsl", raymarching_shader_player_pulse());
-        write_if_missing(raymarching_shader_folder() + "/maze_echo.glsl", raymarching_shader_maze_echo());
-        write_if_missing(raymarching_shader_folder() + "/signal_lattice.glsl", raymarching_shader_signal_lattice());
-        write_if_missing(raymarching_shader_folder() + "/README.md", shader_reference_text());
-        write_if_missing(shadertoy_shader_folder() + "/starter.toy", shadertoy_shader_starter());
-        write_if_missing(shadertoy_shader_folder() + "/README.md", shadertoy_reference_text());
+        if (editable_shader_settings.startup.seed_example_shaders_if_missing)
+        {
+            write_if_missing(raymarching_shader_folder() + "/player_pulse.glsl", raymarching_shader_player_pulse());
+            write_if_missing(raymarching_shader_folder() + "/maze_echo.glsl", raymarching_shader_maze_echo());
+            write_if_missing(raymarching_shader_folder() + "/signal_lattice.glsl", raymarching_shader_signal_lattice());
+            write_if_missing(raymarching_shader_folder() + "/README.md", shader_reference_text());
+            write_if_missing(shadertoy_shader_folder() + "/starter.toy", shadertoy_shader_starter());
+            write_if_missing(shadertoy_shader_folder() + "/README.md", shadertoy_reference_text());
+        }
     }
 
     inline bool is_supported_fragment_shader_file(const std::filesystem::path& path)
@@ -720,28 +938,77 @@ In a portable build, this folder lives next to the executable.
         return true;
     }
 
-    inline std::vector<std::string> discover_fragment_shader_paths()
+    inline void sort_shader_entries(std::vector<ShaderFileEntry>& entries)
     {
-        std::vector<std::string> filepaths;
-
-        const std::array<std::string, 2> folders =
+        std::sort(entries.begin(), entries.end(), [](const ShaderFileEntry& left, const ShaderFileEntry& right)
         {
-            raymarching_shader_folder(),
-            shadertoy_shader_folder()
-        };
+            return left.filepath < right.filepath;
+        });
+    }
 
-        for (const std::string& folder : folders)
+    inline void apply_shader_entry_limit(std::vector<ShaderFileEntry>& entries, int max_count)
+    {
+        if (max_count <= 0)
         {
-            for (const std::string& filepath : Folder::getFilePathsInFolder(folder))
+            return;
+        }
+
+        const size_t limited_count = static_cast<size_t>(max_count);
+        if (entries.size() > limited_count)
+        {
+            entries.resize(limited_count);
+        }
+    }
+
+    inline ShaderDiscoveryResult discover_fragment_shader_entries()
+    {
+        ShaderDiscoveryResult result;
+        const EditableShaderSettings& editable_shader_settings = settings();
+
+        for (const std::string& filepath : Folder::getFilePathsInFolder(raymarching_shader_folder()))
+        {
+            if (is_supported_fragment_shader_file(std::filesystem::path(filepath)))
             {
-                if (is_supported_fragment_shader_file(std::filesystem::path(filepath)))
-                {
-                    filepaths.push_back(filepath);
-                }
+                result.raymarching.push_back({ filepath, ShaderFamily::raymarching });
             }
         }
 
-        std::sort(filepaths.begin(), filepaths.end());
+        for (const std::string& filepath : Folder::getFilePathsInFolder(shadertoy_shader_folder()))
+        {
+            if (is_supported_fragment_shader_file(std::filesystem::path(filepath)))
+            {
+                result.shadertoy.push_back({ filepath, ShaderFamily::shadertoy });
+            }
+        }
+
+        sort_shader_entries(result.raymarching);
+        sort_shader_entries(result.shadertoy);
+
+        result.raymarching_found = result.raymarching.size();
+        result.shadertoy_found = result.shadertoy.size();
+
+        apply_shader_entry_limit(result.raymarching, editable_shader_settings.shader_mix.max_raymarching_shaders);
+        apply_shader_entry_limit(result.shadertoy, editable_shader_settings.shader_mix.max_shadertoy_shaders);
+
+        result.all.reserve(result.raymarching.size() + result.shadertoy.size());
+        result.all.insert(result.all.end(), result.raymarching.begin(), result.raymarching.end());
+        result.all.insert(result.all.end(), result.shadertoy.begin(), result.shadertoy.end());
+
+        sort_shader_entries(result.all);
+        return result;
+    }
+
+    inline std::vector<std::string> discover_fragment_shader_paths()
+    {
+        std::vector<std::string> filepaths;
+        const ShaderDiscoveryResult discovery = discover_fragment_shader_entries();
+        filepaths.reserve(discovery.all.size());
+
+        for (const ShaderFileEntry& entry : discovery.all)
+        {
+            filepaths.push_back(entry.filepath);
+        }
+
         return filepaths;
     }
 
